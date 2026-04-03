@@ -400,21 +400,34 @@ footer .fr{font-size:0.7rem;color:rgba(255,255,255,0.18);}
     <div class="s-label">Qui on est</div>
     <div class="s-title">Une asso.<br>Trois fondateurs.<br><em>Une communauté.</em></div>
     <p class="s-intro">Le Tout Terrain Club est une association fondée en juillet 2024 à Nice. Pas un media, pas une agence — une communauté de coureurs portée par trois membres fondateurs et 312 adhérents actifs.</p>
-    <div class="team-grid">
-      <div class="team-card">
-        <div class="team-role">Président · Fondateur</div>
-        <div class="team-name">Alexandre<br>Dussourd</div>
-        <p class="team-bio">L'instigateur. C'est son idée de ne plus courir seul qui a tout déclenché. Il porte la vision du projet, les partenariats et la stratégie de contenu.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;border:2px solid var(--ink);">
+      <div style="padding:44px;background:var(--white);">
+        <div style="font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);margin-bottom:16px;">Notre histoire</div>
+        <p style="font-size:1rem;line-height:1.8;color:#4A3E38;margin-bottom:18px;">Tout a commencé par une idée simple : <strong>ne plus courir seul</strong>. En juillet 2024, trois membres fondateurs créent le Tout Terrain Club à Nice. En moins d'un an, la communauté compte plus de 312 adhérents actifs.</p>
+        <p style="font-size:1rem;line-height:1.8;color:#4A3E38;">Le concept <strong>Trail to Techno™</strong> émerge naturellement — une envie de faire des choses que personne ne faisait, de fusionner le trail et la culture électronique, et de célébrer le territoire niçois et alpin.</p>
       </div>
-      <div class="team-card">
-        <div class="team-role">Secrétaire</div>
-        <div class="team-name">Julien<br>Cameron</div>
-        <p class="team-bio">Le moteur opérationnel du club. Il gère l'organisation des sorties, la logistique des événements et fait tourner la machine au quotidien.</p>
-      </div>
-      <div class="team-card">
-        <div class="team-role">Trésorier</div>
-        <div class="team-name">Damien<br>Carini</div>
-        <p class="team-bio">Le rigueur du trio. En charge des finances, de la structure associative et de tout ce qui permet au projet d'exister concrètement.</p>
+      <div style="padding:44px;background:var(--off);border-left:2px solid var(--ink);display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:18px;background:var(--white);border:1px solid var(--rule);">
+          <span style="font-size:1.4rem;flex-shrink:0;">🏔️</span>
+          <div>
+            <strong style="font-family:'Anton',sans-serif;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.04em;display:block;margin-bottom:4px;">Association loi 1901</strong>
+            <span style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Structure formelle, comptabilité transparente, gouvernance collective. Un partenariat avec nous c'est un partenariat sérieux.</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:18px;background:var(--white);border:1px solid var(--rule);">
+          <span style="font-size:1.4rem;flex-shrink:0;">📍</span>
+          <div>
+            <strong style="font-family:'Anton',sans-serif;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.04em;display:block;margin-bottom:4px;">Ancrés à Nice</strong>
+            <span style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Pas un projet en ligne — une communauté physique qui se retrouve chaque semaine dans les rues et les sentiers de Nice et du Mercantour.</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:18px;background:var(--white);border:1px solid var(--rule);">
+          <span style="font-size:1.4rem;flex-shrink:0;">🎯</span>
+          <div>
+            <strong style="font-family:'Anton',sans-serif;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.04em;display:block;margin-bottom:4px;">2 éditions, 1 concept</strong>
+            <span style="font-size:0.82rem;color:var(--muted);line-height:1.6;">Trail to Techno™ a déjà prouvé que ça marche — deux fois. L'édition Gelas 2026 est la suite logique.</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="team-footer">
@@ -950,4 +963,9 @@ function buildKeypoints(){
 window.addEventListener('load',()=>{drawMap();drawElev();buildKeypoints();});
 window.addEventListener('resize',()=>{drawMap();drawElev();});
 
-const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.class
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:0.05});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>p.classList.toggle('on')));
+</script>
+</body>
+</html>
