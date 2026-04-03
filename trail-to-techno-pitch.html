@@ -8,408 +8,481 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
 :root {
-  --red: #D42B1E;
-  --red-dark: #A01E14;
-  --red-light: #F03D2E;
-  --white: #FFFFFF;
-  --off: #F5F1EC;
-  --paper: #FAFAF8;
-  --ink: #1A1410;
-  --muted: #8C7B72;
-  --rule: #E0D8D0;
+  --red:#D42B1E;--red-light:#F03D2E;--white:#FFFFFF;
+  --off:#F5F1EC;--paper:#FAFAF8;--ink:#1A1410;
+  --muted:#8C7B72;--rule:#E0D8D0;
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body { background:var(--paper); color:var(--ink); font-family:'DM Sans',sans-serif; font-weight:300; overflow-x:hidden; }
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;}
 
 /* NAV */
-nav { position:fixed; top:0; left:0; right:0; z-index:200; background:var(--white); border-bottom:2px solid var(--ink); display:flex; align-items:center; justify-content:space-between; padding:0 48px; height:56px; }
-.nav-brand { font-family:'Anton',sans-serif; font-size:1rem; letter-spacing:0.08em; text-transform:uppercase; }
-.nav-brand em { color:var(--red); font-style:normal; }
-nav ul { list-style:none; display:flex; }
-nav ul li a { display:block; padding:0 16px; height:56px; line-height:56px; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); text-decoration:none; border-left:1px solid var(--rule); transition:all 0.15s; }
-nav ul li a:hover { color:var(--red); background:var(--off); }
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--white);border-bottom:2px solid var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:56px;}
+.nav-brand{font-family:'Anton',sans-serif;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;}
+.nav-brand em{color:var(--red);font-style:normal;}
+nav ul{list-style:none;display:flex;}
+nav ul li a{display:block;padding:0 14px;height:56px;line-height:56px;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-left:1px solid var(--rule);transition:all 0.15s;}
+nav ul li a:hover{color:var(--red);background:var(--off);}
 
-/* PHOTO UTILS */
-.photo-frame { overflow:hidden; position:relative; }
-.photo-frame img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.7) contrast(1.1) brightness(0.95); transition:transform 0.6s ease, filter 0.4s ease; }
-.photo-frame:hover img { transform:scale(1.03); filter:saturate(0.5) contrast(1.15) brightness(0.9); }
-.photo-overlay-red::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(212,43,30,0.3) 0%,rgba(212,43,30,0.05) 100%); mix-blend-mode:multiply; pointer-events:none; }
-.photo-bg { position:absolute; inset:0; z-index:0; }
-.photo-bg img { width:100%; height:100%; object-fit:cover; filter:saturate(0.4) contrast(1.2) brightness(0.6); }
-.photo-bg::after { content:''; position:absolute; inset:0; background:rgba(212,43,30,0.55); mix-blend-mode:multiply; }
+/* URGENCY BAR */
+.urgency-bar{background:var(--red);padding:10px 48px;display:flex;align-items:center;justify-content:center;gap:16px;border-bottom:2px solid var(--ink);margin-top:56px;}
+.urgency-bar span{font-family:'Anton',sans-serif;font-size:0.85rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--white);}
+.urgency-bar strong{color:rgba(255,255,255,0.5);font-weight:300;font-family:'DM Sans',sans-serif;font-size:0.78rem;letter-spacing:0.05em;}
+
+/* PHOTO */
+.photo-frame{overflow:hidden;position:relative;}
+.photo-frame img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.7) contrast(1.1) brightness(0.95);transition:transform 0.6s ease;}
+.photo-frame:hover img{transform:scale(1.03);}
+.photo-overlay::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,43,30,0.28),rgba(212,43,30,0.04));mix-blend-mode:multiply;pointer-events:none;}
+.photo-bg{position:absolute;inset:0;z-index:0;}
+.photo-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(0.35) contrast(1.2) brightness(0.55);}
+.photo-bg::after{content:'';position:absolute;inset:0;background:rgba(212,43,30,0.58);mix-blend-mode:multiply;}
 
 /* HERO */
-.hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; border-top:56px solid transparent; }
-.hero-left { position:relative; display:flex; flex-direction:column; justify-content:space-between; padding:80px 64px; overflow:hidden; }
-.hero-left .photo-bg img { filter:saturate(0.25) contrast(1.3) brightness(0.45); }
-.hero-left .photo-bg::after { background:rgba(180,30,20,0.72); }
-.hero-left-content { position:relative; z-index:1; display:flex; flex-direction:column; justify-content:space-between; height:100%; }
-.hero-tag { display:inline-flex; align-items:center; gap:10px; font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.7); animation:fadeIn 0.6s 0.2s both; }
-.hero-tag::before { content:''; width:20px; height:1px; background:rgba(255,255,255,0.5); }
-.hero-title { font-family:'Anton',sans-serif; font-size:clamp(72px,9vw,140px); line-height:0.9; text-transform:uppercase; color:var(--white); letter-spacing:0.02em; animation:slideUp 0.7s 0.4s both; }
-.hero-subtitle { font-size:1rem; line-height:1.7; color:rgba(255,255,255,0.85); max-width:360px; animation:slideUp 0.7s 0.6s both; }
-.hero-right { background:var(--white); padding:80px 64px; display:flex; flex-direction:column; justify-content:space-between; border-left:2px solid var(--ink); }
-.hero-right-top { animation:slideUp 0.7s 0.5s both; }
-.hero-date { font-family:'Anton',sans-serif; font-size:5rem; line-height:0.9; color:var(--ink); }
-.hero-date small { font-family:'DM Sans',sans-serif; font-weight:300; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:12px; }
-.hero-pitch { font-size:1.05rem; line-height:1.75; color:var(--muted); margin-top:32px; border-top:1px solid var(--rule); padding-top:24px; }
-.hero-pitch strong { color:var(--ink); font-weight:500; }
-.hero-kpis { display:grid; grid-template-columns:1fr 1fr; gap:2px; animation:slideUp 0.7s 0.8s both; }
-.kpi { padding:24px; background:var(--off); border:1px solid var(--rule); }
-.kpi-n { font-family:'Anton',sans-serif; font-size:2.4rem; color:var(--red); line-height:1; }
-.kpi-l { font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-top:4px; }
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;}
+.hero-left{position:relative;padding:80px 64px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;}
+.hero-left .photo-bg img{filter:saturate(0.22) contrast(1.35) brightness(0.42);}
+.hero-left .photo-bg::after{background:rgba(175,28,18,0.75);}
+.hero-left-content{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:space-between;height:100%;}
+.hero-eyebrow{font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.65);display:flex;align-items:center;gap:10px;animation:fadeIn 0.6s 0.2s both;}
+.hero-eyebrow::before{content:'';width:20px;height:1px;background:rgba(255,255,255,0.45);}
+.hero-title{font-family:'Anton',sans-serif;font-size:clamp(72px,9vw,145px);line-height:0.88;text-transform:uppercase;color:var(--white);letter-spacing:0.01em;animation:slideUp 0.7s 0.35s both;}
+.hero-tagline{font-size:1.05rem;line-height:1.7;color:rgba(255,255,255,0.82);max-width:340px;animation:slideUp 0.7s 0.55s both;}
 
-/* PHOTO STRIP */
-.photo-strip { display:grid; grid-template-columns:2fr 1fr 1fr; height:320px; border-top:2px solid var(--ink); }
-.photo-strip .photo-frame { border-right:2px solid var(--ink); }
-.photo-strip .photo-frame:last-child { border-right:none; }
+.hero-right{background:var(--white);padding:80px 64px;display:flex;flex-direction:column;justify-content:space-between;border-left:2px solid var(--ink);}
+.hero-date{font-family:'Anton',sans-serif;font-size:4.8rem;line-height:0.9;color:var(--ink);animation:slideUp 0.7s 0.45s both;}
+.hero-date small{font-family:'DM Sans',sans-serif;font-weight:300;font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px;}
+.hero-desc{font-size:1rem;line-height:1.78;color:var(--muted);margin-top:28px;border-top:1px solid var(--rule);padding-top:22px;}
+.hero-desc strong{color:var(--ink);font-weight:500;}
+.hero-kpis{display:grid;grid-template-columns:1fr 1fr;gap:2px;animation:slideUp 0.7s 0.75s both;}
+.kpi{padding:22px;background:var(--off);border:1px solid var(--rule);}
+.kpi-n{font-family:'Anton',sans-serif;font-size:2.2rem;color:var(--red);line-height:1;}
+.kpi-l{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+
+/* STRIP */
+.photo-strip{display:grid;grid-template-columns:2fr 1fr 1fr;height:280px;border-top:2px solid var(--ink);}
+.photo-strip .photo-frame{border-right:2px solid var(--ink);}
+.photo-strip .photo-frame:last-child{border-right:none;}
 
 /* SHARED */
-.s-wrap { max-width:1200px; margin:0 auto; padding:100px 64px; }
-.s-label { font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--red); display:flex; align-items:center; gap:10px; margin-bottom:16px; }
-.s-label::before { content:''; width:16px; height:2px; background:var(--red); }
-.s-title { font-family:'Anton',sans-serif; font-size:clamp(40px,5vw,72px); line-height:0.92; text-transform:uppercase; letter-spacing:0.01em; margin-bottom:48px; }
-.s-title em { color:var(--red); font-style:normal; }
-.s-intro { font-size:1.05rem; line-height:1.8; color:#4A3E38; max-width:680px; margin-bottom:56px; }
+.s-wrap{max-width:1200px;margin:0 auto;padding:88px 64px;}
+.s-label{font-size:0.68rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.s-label::before{content:'';width:16px;height:2px;background:var(--red);}
+.s-title{font-family:'Anton',sans-serif;font-size:clamp(38px,4.8vw,66px);line-height:0.92;text-transform:uppercase;margin-bottom:44px;}
+.s-title em{color:var(--red);font-style:normal;}
+.s-intro{font-size:1rem;line-height:1.8;color:#4A3E38;max-width:620px;margin-bottom:44px;}
 
-/* CONCEPT */
-.concept-section { background:var(--white); border-top:2px solid var(--ink); }
-.concept-cols { display:grid; grid-template-columns:1.3fr 1fr; gap:80px; align-items:start; }
-.concept-body p { font-size:1rem; line-height:1.8; color:#4A3E38; margin-bottom:20px; }
-.concept-body p strong { color:var(--ink); font-weight:500; }
-.concept-pull { margin-top:40px; padding:32px 40px; border-left:4px solid var(--red); background:var(--off); }
-.concept-pull blockquote { font-family:'Anton',sans-serif; font-size:1.4rem; text-transform:uppercase; line-height:1.25; color:var(--ink); letter-spacing:0.02em; }
-.concept-pull cite { display:block; margin-top:12px; font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); font-style:normal; }
-.concept-right-block { display:flex; flex-direction:column; gap:0; }
-.concept-photo { height:260px; border:2px solid var(--ink); margin-bottom:2px; }
-.concept-tags { border:2px solid var(--ink); border-top:none; }
-.c-tag { padding:18px 28px; border-bottom:1px solid var(--rule); display:flex; justify-content:space-between; align-items:center; font-family:'Anton',sans-serif; font-size:1.2rem; text-transform:uppercase; letter-spacing:0.04em; cursor:default; transition:all 0.15s; }
-.c-tag:last-child { border-bottom:none; }
-.c-tag:hover { background:var(--red); color:var(--white); }
-.c-tag:hover .c-tag-n { color:rgba(255,255,255,0.4); }
-.c-tag-n { font-family:'DM Sans',sans-serif; font-size:0.72rem; font-weight:300; color:var(--muted); letter-spacing:0.1em; }
+/* ── TEAM SECTION ── */
+.team-section{background:var(--red);border-top:2px solid var(--ink);}
+.team-section .s-label{color:rgba(255,255,255,0.55);}
+.team-section .s-label::before{background:rgba(255,255,255,0.4);}
+.team-section .s-title{color:var(--white);}
+.team-section .s-title em{color:rgba(255,255,255,0.35);}
+.team-section .s-intro{color:rgba(255,255,255,0.72);}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.team-card{background:var(--white);padding:44px 36px;position:relative;transition:transform 0.15s;}
+.team-card:hover{transform:translateY(-3px);}
+.team-role{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.team-name{font-family:'Anton',sans-serif;font-size:1.8rem;text-transform:uppercase;letter-spacing:0.02em;line-height:1;margin-bottom:16px;color:var(--ink);}
+.team-bio{font-size:0.88rem;line-height:1.7;color:var(--muted);}
+.team-footer{margin-top:32px;padding:28px 40px;background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.15);border-top:none;}
+.team-footer p{font-size:0.9rem;line-height:1.75;color:rgba(255,255,255,0.72);}
+.team-footer p strong{color:var(--white);font-weight:500;}
 
-/* TERRITOIRE — nouvelle section */
-.territoire-section { background:var(--off); border-top:2px solid var(--ink); }
-.territoire-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
-.territoire-map { border:2px solid var(--ink); overflow:hidden; position:relative; }
-.territoire-map img { width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(0.8) contrast(1.05); display:block; }
-.territoire-map-label { position:absolute; top:24px; left:24px; background:var(--red); color:var(--white); font-family:'Anton',sans-serif; font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase; padding:8px 16px; }
-.territoire-right { display:flex; flex-direction:column; gap:2px; }
-.territoire-view { height:340px; border:2px solid var(--ink); border-left:none; overflow:hidden; position:relative; }
-.territoire-view img { width:100%; height:100%; object-fit:cover; filter:saturate(0.75) contrast(1.1) brightness(0.95); }
-.territoire-view::after { content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(26,20,16,0.6) 0%, transparent 50%); }
-.territoire-view-caption { position:absolute; bottom:24px; left:24px; z-index:2; }
-.territoire-view-caption .big { font-family:'Anton',sans-serif; font-size:1.8rem; color:var(--white); text-transform:uppercase; letter-spacing:0.04em; }
-.territoire-view-caption .small { font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.65); display:block; margin-bottom:4px; }
-.territoire-info-cards { display:grid; grid-template-columns:1fr 1fr; gap:2px; flex:1; }
-.t-info { padding:28px 32px; background:var(--white); border:1px solid var(--rule); display:flex; flex-direction:column; gap:6px; }
-.t-info-icon { font-size:1.4rem; }
-.t-info-title { font-family:'Anton',sans-serif; font-size:1rem; text-transform:uppercase; letter-spacing:0.04em; }
-.t-info-desc { font-size:0.8rem; color:var(--muted); line-height:1.6; }
+/* ── PROOF STRIP ── */
+.proof-section{background:var(--off);border-top:2px solid var(--ink);}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border:2px solid var(--ink);}
+.proof-card{background:var(--white);padding:36px 32px;border-right:1px solid var(--rule);transition:background 0.15s;}
+.proof-card:last-child{border-right:none;}
+.proof-card:hover{background:var(--red);color:var(--white);}
+.proof-card:hover .proof-desc{color:rgba(255,255,255,0.65);}
+.proof-n{font-family:'Anton',sans-serif;font-size:clamp(40px,4vw,60px);color:var(--red);line-height:1;transition:color 0.15s;}
+.proof-card:hover .proof-n{color:var(--white);}
+.proof-n sup{font-size:0.45em;vertical-align:super;}
+.proof-label{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:8px;transition:color 0.15s;}
+.proof-card:hover .proof-label{color:rgba(255,255,255,0.6);}
+.proof-desc{font-size:0.82rem;color:#7A6E68;margin-top:12px;line-height:1.6;}
+.proof-editions{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px;border:2px solid var(--ink);border-top:none;}
+.edition-card{padding:32px 40px;background:var(--white);border-right:1px solid var(--rule);}
+.edition-card:last-child{border-right:none;}
+.edition-num{font-family:'Anton',sans-serif;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.edition-title{font-family:'Anton',sans-serif;font-size:1.3rem;text-transform:uppercase;letter-spacing:0.03em;margin-bottom:10px;}
+.edition-desc{font-size:0.85rem;line-height:1.7;color:var(--muted);}
 
-.acteurs-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:48px; border:2px solid var(--ink); }
-.acteur-card { padding:32px 28px; background:var(--white); border-right:1px solid var(--rule); transition:background 0.15s; }
-.acteur-card:last-child { border-right:none; }
-.acteur-card:hover { background:var(--red); color:var(--white); }
-.acteur-card:hover .acteur-desc { color:rgba(255,255,255,0.7); }
-.acteur-icon { font-size:2rem; margin-bottom:12px; }
-.acteur-name { font-family:'Anton',sans-serif; font-size:1rem; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px; }
-.acteur-desc { font-size:0.8rem; color:var(--muted); line-height:1.6; }
+/* ── CONCEPT ── */
+.concept-section{background:var(--white);border-top:2px solid var(--ink);}
+.concept-cols{display:grid;grid-template-columns:1.3fr 1fr;gap:72px;align-items:start;}
+.concept-body p{font-size:1rem;line-height:1.8;color:#4A3E38;margin-bottom:18px;}
+.concept-body p strong{color:var(--ink);font-weight:500;}
+.concept-pull{margin-top:32px;padding:28px 36px;border-left:4px solid var(--red);background:var(--off);}
+.concept-pull blockquote{font-family:'Anton',sans-serif;font-size:1.25rem;text-transform:uppercase;line-height:1.25;color:var(--ink);letter-spacing:0.02em;}
+.concept-pull cite{display:block;margin-top:10px;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);font-style:normal;}
+.concept-right{display:flex;flex-direction:column;gap:0;}
+.concept-photo{height:230px;border:2px solid var(--ink);margin-bottom:2px;}
+.concept-tags{border:2px solid var(--ink);border-top:none;}
+.c-tag{padding:16px 24px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;font-family:'Anton',sans-serif;font-size:1.1rem;text-transform:uppercase;letter-spacing:0.04em;cursor:default;transition:all 0.15s;}
+.c-tag:last-child{border-bottom:none;}
+.c-tag:hover{background:var(--red);color:var(--white);}
+.c-tag:hover .c-tag-n{color:rgba(255,255,255,0.35);}
+.c-tag-n{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:300;color:var(--muted);}
 
-/* STATS */
-.stats-section { position:relative; border-top:2px solid var(--ink); overflow:hidden; }
-.stats-inner { position:relative; z-index:1; }
-.stats-section .s-label { color:rgba(255,255,255,0.6); }
-.stats-section .s-label::before { background:rgba(255,255,255,0.5); }
-.stats-section .s-title { color:var(--white); }
-.stats-section .s-title em { color:rgba(255,255,255,0.35); }
-.stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
-.stat-card { background:var(--white); padding:48px 40px; transition:transform 0.15s; }
-.stat-card:hover { transform:translateY(-3px); }
-.stat-n { font-family:'Anton',sans-serif; font-size:clamp(48px,5vw,72px); line-height:1; color:var(--red); }
-.stat-n sup { font-size:0.45em; vertical-align:super; }
-.stat-l { font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:10px; }
-.stat-d { font-size:0.85rem; color:#7A6E68; margin-top:14px; line-height:1.6; }
+/* ── TRACE GPX ── */
+.trace-section{background:var(--off);border-top:2px solid var(--ink);}
+.trace-container{display:grid;grid-template-columns:1fr 1fr;gap:2px;border:2px solid var(--ink);}
+.trace-map-wrap{background:var(--white);position:relative;}
+.trace-map-wrap canvas{display:block;width:100%;cursor:crosshair;}
+.trace-elev-wrap{background:var(--white);border-left:2px solid var(--ink);padding:32px;}
+.trace-elev-title{font-family:'Anton',sans-serif;font-size:0.95rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:18px;}
+.trace-elev-wrap canvas{display:block;width:100%;}
+.trace-keypoints{margin-top:20px;display:flex;flex-direction:column;gap:2px;}
+.trace-kp{display:flex;align-items:center;gap:14px;padding:11px 14px;background:var(--off);border:1px solid var(--rule);}
+.trace-kp-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.trace-kp-name{font-family:'Anton',sans-serif;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em;}
+.trace-kp-info{font-size:0.73rem;color:var(--muted);margin-left:auto;white-space:nowrap;}
 
-/* EXPEDITION */
-.expo-section { background:var(--off); border-top:2px solid var(--ink); }
-.expo-photo-banner { height:420px; border:2px solid var(--ink); margin-bottom:2px; position:relative; overflow:hidden; }
-.expo-photo-banner img { width:100%; height:100%; object-fit:cover; filter:saturate(0.65) contrast(1.15) brightness(0.88); }
-.expo-photo-banner::after { content:''; position:absolute; inset:0; background:linear-gradient(to right,rgba(212,43,30,0.2) 0%,transparent 60%); }
-.expo-banner-label { position:absolute; bottom:32px; left:40px; z-index:2; }
-.expo-banner-label .big { font-family:'Anton',sans-serif; font-size:2.8rem; color:var(--white); text-transform:uppercase; letter-spacing:0.02em; display:block; text-shadow:0 2px 12px rgba(0,0,0,0.5); }
-.expo-banner-label .small { font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.7); display:block; margin-bottom:8px; }
+/* ── EXPEDITION ── */
+.expo-section{background:var(--white);border-top:2px solid var(--ink);}
+.expo-photo-banner{height:360px;border:2px solid var(--ink);margin-bottom:2px;position:relative;overflow:hidden;}
+.expo-photo-banner img{width:100%;height:100%;object-fit:cover;filter:saturate(0.65) contrast(1.15) brightness(0.88);}
+.expo-photo-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(212,43,30,0.2),transparent 60%);}
+.expo-banner-label{position:absolute;bottom:28px;left:36px;z-index:2;}
+.expo-banner-label .big{font-family:'Anton',sans-serif;font-size:2.2rem;color:var(--white);text-transform:uppercase;display:block;text-shadow:0 2px 12px rgba(0,0,0,0.5);}
+.expo-banner-label .small{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.68);display:block;margin-bottom:6px;}
+.expo-timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border:2px solid var(--ink);border-top:none;}
+.expo-day{padding:40px 36px;background:var(--off);border-right:1px solid var(--rule);}
+.expo-day:last-child{border-right:none;}
+.expo-day:nth-child(2){background:var(--white);}
+.expo-day-num{font-family:'Anton',sans-serif;font-size:3.2rem;line-height:1;color:var(--red);}
+.expo-day-date{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;}
+.expo-day-title{font-family:'Anton',sans-serif;font-size:0.95rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:14px;border-bottom:2px solid var(--red);padding-bottom:10px;display:inline-block;}
+.expo-day ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.expo-day ul li{font-size:0.84rem;color:#5A4E48;padding-left:14px;position:relative;line-height:1.5;}
+.expo-day ul li::before{content:'—';position:absolute;left:0;color:var(--red);font-size:0.68rem;}
+.expo-day ul li.highlight{font-weight:500;color:var(--ink);}
+.expo-route{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;border:2px solid var(--ink);border-top:none;}
+.route-s{padding:30px;background:var(--ink);display:flex;flex-direction:column;gap:6px;}
+.route-s-n{font-family:'Anton',sans-serif;font-size:1.9rem;color:var(--red-light);line-height:1;}
+.route-s-l{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.42);line-height:1.5;}
 
-.expo-timeline { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; border:2px solid var(--ink); border-top:none; }
-.expo-day { padding:48px 40px; background:var(--white); border-right:1px solid var(--rule); }
-.expo-day:last-child { border-right:none; }
-.expo-day-num { font-family:'Anton',sans-serif; font-size:4rem; line-height:1; color:var(--red); }
-.expo-day-date { font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:24px; }
-.expo-day-title { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:20px; border-bottom:2px solid var(--red); padding-bottom:12px; display:inline-block; }
-.expo-day ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
-.expo-day ul li { font-size:0.88rem; color:#5A4E48; padding-left:14px; position:relative; line-height:1.5; }
-.expo-day ul li::before { content:'—'; position:absolute; left:0; color:var(--red); font-size:0.7rem; }
-.expo-route { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:2px; border:2px solid var(--ink); border-top:none; }
-.route-s { padding:36px; background:var(--ink); display:flex; flex-direction:column; gap:8px; }
-.route-s-n { font-family:'Anton',sans-serif; font-size:2.2rem; color:var(--red-light); line-height:1; }
-.route-s-l { font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.45); line-height:1.5; }
+/* ── SAMEDI COMMUNAUTÉ ── */
+.saturday-section{background:var(--red);border-top:2px solid var(--ink);}
+.saturday-section .s-label{color:rgba(255,255,255,0.55);}
+.saturday-section .s-label::before{background:rgba(255,255,255,0.4);}
+.saturday-section .s-title{color:var(--white);}
+.saturday-section .s-title em{color:rgba(255,255,255,0.35);}
+.saturday-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.sat-card{background:var(--white);padding:36px 28px;border-right:1px solid var(--rule);transition:transform 0.15s;}
+.sat-card:last-child{border-right:none;}
+.sat-card:hover{transform:translateY(-3px);}
+.sat-icon{font-size:2rem;margin-bottom:14px;}
+.sat-time{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.sat-title{font-family:'Anton',sans-serif;font-size:1.1rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:10px;}
+.sat-desc{font-size:0.82rem;line-height:1.65;color:var(--muted);}
+.sat-highlight{margin-top:2px;padding:32px 40px;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.2);border-top:none;display:flex;align-items:center;gap:28px;}
+.sat-highlight-icon{font-size:2.5rem;flex-shrink:0;}
+.sat-highlight h4{font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
+.sat-highlight p{font-size:0.88rem;color:rgba(255,255,255,0.75);line-height:1.7;}
+.sat-highlight p strong{color:var(--white);}
 
-/* CHALET & MUSIQUE — nouvelle section */
-.chalet-section { background:var(--white); border-top:2px solid var(--ink); }
-.chalet-hero { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-bottom:2px; border:2px solid var(--ink); }
-.chalet-img { height:400px; overflow:hidden; position:relative; }
-.chalet-img img { width:100%; height:100%; object-fit:cover; filter:saturate(0.6) contrast(1.15) brightness(0.9); }
-.chalet-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(26,20,16,0.55) 0%,transparent 55%); }
-.chalet-img-caption { position:absolute; bottom:24px; left:28px; z-index:2; }
-.chalet-img-caption .t { font-family:'Anton',sans-serif; font-size:1.5rem; color:var(--white); text-transform:uppercase; letter-spacing:0.04em; display:block; }
-.chalet-img-caption .s { font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.6); display:block; margin-bottom:4px; }
-.chalet-info { padding:48px; background:var(--off); border-left:2px solid var(--ink); display:flex; flex-direction:column; justify-content:center; gap:24px; }
-.chalet-info h3 { font-family:'Anton',sans-serif; font-size:2rem; text-transform:uppercase; line-height:1; letter-spacing:0.04em; }
-.chalet-info h3 em { color:var(--red); font-style:normal; }
-.chalet-info p { font-size:0.95rem; line-height:1.8; color:#4A3E38; }
-.chalet-detail { display:flex; align-items:flex-start; gap:16px; padding:20px; background:var(--white); border:1px solid var(--rule); }
-.chalet-detail-icon { font-size:1.5rem; flex-shrink:0; }
-.chalet-detail-text strong { display:block; font-family:'Anton',sans-serif; font-size:0.9rem; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px; }
-.chalet-detail-text span { font-size:0.82rem; color:var(--muted); line-height:1.5; }
+/* ── CHALET + MUSIQUE ── */
+.chalet-section{background:var(--off);border-top:2px solid var(--ink);}
+.chalet-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;border:2px solid var(--ink);}
+.chalet-img{height:340px;overflow:hidden;position:relative;}
+.chalet-img img{width:100%;height:100%;object-fit:cover;filter:saturate(0.6) contrast(1.15) brightness(0.88);}
+.chalet-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(26,20,16,0.55),transparent 55%);}
+.chalet-img-caption{position:absolute;bottom:22px;left:26px;z-index:2;}
+.chalet-img-caption .t{font-family:'Anton',sans-serif;font-size:1.3rem;color:var(--white);text-transform:uppercase;letter-spacing:0.04em;display:block;}
+.chalet-img-caption .s{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.58);display:block;margin-bottom:4px;}
+.chalet-info{padding:44px;background:var(--white);border-left:2px solid var(--ink);display:flex;flex-direction:column;gap:18px;}
+.chalet-info h3{font-family:'Anton',sans-serif;font-size:1.7rem;text-transform:uppercase;line-height:1;letter-spacing:0.03em;}
+.chalet-info h3 em{color:var(--red);font-style:normal;}
+.chalet-info p{font-size:0.92rem;line-height:1.78;color:#4A3E38;}
+.chalet-detail{display:flex;align-items:flex-start;gap:12px;padding:14px;background:var(--off);border:1px solid var(--rule);}
+.chalet-detail-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px;}
+.chalet-detail-text strong{display:block;font-family:'Anton',sans-serif;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:3px;}
+.chalet-detail-text span{font-size:0.78rem;color:var(--muted);line-height:1.5;}
 
-/* MUSIC JOURNEY */
-.music-section { background:var(--off); border-top:2px solid var(--ink); }
-.music-journey { display:grid; grid-template-columns:repeat(5,1fr); gap:2px; border:2px solid var(--ink); margin-bottom:2px; }
-.music-step { padding:32px 28px; background:var(--white); border-right:1px solid var(--rule); position:relative; transition:background 0.15s; }
-.music-step:last-child { border-right:none; }
-.music-step:hover { background:var(--red); color:var(--white); }
-.music-step:hover .music-sub, .music-step:hover .music-desc { color:rgba(255,255,255,0.65); }
-.music-step:hover .music-arrow { color:rgba(255,255,255,0.3); }
-.music-phase { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--red); margin-bottom:8px; display:block; }
-.music-step:hover .music-phase { color:rgba(255,255,255,0.5); }
-.music-name { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px; }
-.music-sub { font-size:0.72rem; color:var(--muted); margin-bottom:12px; }
-.music-desc { font-size:0.8rem; color:#5A4E48; line-height:1.6; }
-.music-arrow { position:absolute; top:50%; right:-12px; transform:translateY(-50%); font-size:1.2rem; color:var(--rule); z-index:2; }
-.music-step:last-child .music-arrow { display:none; }
+/* Music row */
+.music-row{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;border:2px solid var(--ink);border-top:none;}
+.music-step{padding:24px 20px;background:var(--white);border-right:1px solid var(--rule);transition:background 0.15s;}
+.music-step:last-child{border-right:none;}
+.music-step:hover{background:var(--red);color:var(--white);}
+.music-step:hover .music-sub,.music-step:hover .music-phase{color:rgba(255,255,255,0.55);}
+.music-phase{font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:6px;display:block;}
+.music-name{font-family:'Anton',sans-serif;font-size:0.95rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:3px;}
+.music-sub{font-size:0.72rem;color:var(--muted);}
 
-.music-note { padding:32px 40px; background:var(--ink); border:2px solid var(--ink); border-top:none; display:flex; align-items:center; gap:32px; }
-.music-note-icon { font-size:2rem; flex-shrink:0; }
-.music-note p { font-size:0.9rem; color:rgba(255,255,255,0.6); line-height:1.7; }
-.music-note p strong { color:var(--white); font-weight:500; }
+/* Resonance */
+.resonance-row{padding:28px 40px;background:var(--ink);border:2px solid var(--ink);border-top:none;display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;}
+.resonance-name{font-family:'Anton',sans-serif;font-size:2.6rem;color:var(--white);letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;}
+.resonance-name em{color:var(--red-light);font-style:normal;}
+.resonance-text{font-size:0.88rem;color:rgba(255,255,255,0.55);line-height:1.7;}
+.resonance-text strong{color:var(--white);font-weight:500;}
+.resonance-link{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-family:'Anton',sans-serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--red-light);text-decoration:none;}
 
-/* COMMUNITY TESTING */
-.testing-section { background:var(--white); border-top:2px solid var(--ink); }
-.testing-cols { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
-.testing-body p { font-size:1rem; line-height:1.8; color:#4A3E38; margin-bottom:20px; }
-.testing-body p strong { color:var(--ink); font-weight:500; }
-.testing-blocks { display:flex; flex-direction:column; gap:2px; }
-.test-block { padding:28px 36px; background:var(--off); border:1px solid var(--rule); display:flex; gap:20px; align-items:flex-start; transition:border-color 0.15s; }
-.test-block:hover { border-color:var(--red); }
-.test-block-icon { font-size:1.8rem; flex-shrink:0; }
-.test-block-content strong { display:block; font-family:'Anton',sans-serif; font-size:1rem; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px; }
-.test-block-content p { font-size:0.85rem; color:var(--muted); line-height:1.6; }
-.supporter-banner { margin-top:48px; padding:40px; background:var(--red); border:2px solid var(--ink); display:flex; align-items:center; gap:32px; }
-.supporter-banner-icon { font-size:3rem; flex-shrink:0; }
-.supporter-banner h4 { font-family:'Anton',sans-serif; font-size:1.6rem; text-transform:uppercase; color:var(--white); margin-bottom:8px; }
-.supporter-banner p { font-size:0.9rem; color:rgba(255,255,255,0.75); line-height:1.7; }
+/* ── AUDIENCE ── */
+.audience-section{background:var(--white);border-top:2px solid var(--ink);}
+.aud-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
+.aud-photo{height:280px;border:2px solid var(--ink);margin-bottom:24px;}
+.aud-body{font-size:0.97rem;line-height:1.8;color:#4A3E38;margin-bottom:28px;}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0;}
+.pill{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;padding:6px 12px;border:1px solid var(--rule);color:var(--muted);cursor:pointer;transition:all 0.15s;}
+.pill.on,.pill:hover{background:var(--red);color:var(--white);border-color:var(--red);}
+.reach-table{border:2px solid var(--ink);overflow:hidden;}
+.reach-row{display:flex;align-items:center;justify-content:space-between;padding:15px 22px;border-bottom:1px solid var(--rule);transition:background 0.12s;}
+.reach-row:last-child{border-bottom:none;}
+.reach-row:hover{background:var(--off);}
+.reach-p{font-family:'Anton',sans-serif;font-size:0.92rem;text-transform:uppercase;letter-spacing:0.05em;}
+.reach-n{font-family:'Anton',sans-serif;font-size:1.6rem;color:var(--red);line-height:1;}
+.reach-n small{font-family:'DM Sans',sans-serif;font-size:0.55em;color:var(--muted);font-weight:300;}
 
-/* AUDIENCE */
-.audience-section { background:var(--off); border-top:2px solid var(--ink); }
-.aud-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
-.aud-photo { height:320px; border:2px solid var(--ink); margin-bottom:32px; }
-.aud-body { font-size:1rem; line-height:1.8; color:#4A3E38; margin-bottom:36px; }
-.pills { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:40px; }
-.pill { font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; padding:7px 14px; border:1px solid var(--rule); color:var(--muted); cursor:pointer; transition:all 0.15s; }
-.pill.on, .pill:hover { background:var(--red); color:var(--white); border-color:var(--red); }
-.reach-table { border:2px solid var(--ink); overflow:hidden; }
-.reach-row { display:flex; align-items:center; justify-content:space-between; padding:18px 28px; border-bottom:1px solid var(--rule); transition:background 0.12s; }
-.reach-row:last-child { border-bottom:none; }
-.reach-row:hover { background:var(--white); }
-.reach-p { font-family:'Anton',sans-serif; font-size:1rem; text-transform:uppercase; letter-spacing:0.05em; }
-.reach-n { font-family:'Anton',sans-serif; font-size:1.8rem; color:var(--red); line-height:1; }
-.reach-n small { font-family:'DM Sans',sans-serif; font-size:0.55em; color:var(--muted); font-weight:300; }
+/* ── CONTENUS ── */
+.content-section{background:var(--paper);border-top:2px solid var(--ink);}
+.dj-banner{height:300px;border:2px solid var(--ink);margin-bottom:2px;position:relative;overflow:hidden;}
+.dj-banner img{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(0.5) contrast(1.2) brightness(0.82);}
+.dj-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(212,43,30,0.45),rgba(26,20,16,0.15) 100%);}
+.dj-banner-label{position:absolute;bottom:26px;left:36px;z-index:2;}
+.dj-banner-label .t{font-family:'Anton',sans-serif;font-size:2rem;color:var(--white);text-transform:uppercase;letter-spacing:0.04em;}
+.dj-banner-label .s{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.62);display:block;margin-bottom:5px;}
+.content-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border:2px solid var(--ink);border-top:none;}
+.c-card{background:var(--white);padding:32px 28px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transition:background 0.15s;}
+.c-card:hover{background:var(--red);color:var(--white);}
+.c-card:hover .c-card-fmt,.c-card:hover li{color:rgba(255,255,255,0.68);}
+.c-card:hover li::before{color:rgba(255,255,255,0.38);}
+.c-card-type{font-family:'Anton',sans-serif;font-size:1.15rem;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:3px;}
+.c-card-fmt{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:block;}
+.c-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.c-card ul li{font-size:0.78rem;color:#5A4E48;padding-left:11px;position:relative;line-height:1.5;}
+.c-card ul li::before{content:'→';position:absolute;left:0;color:var(--muted);font-size:0.6rem;}
 
-/* CONTENUS */
-.content-section { background:var(--paper); border-top:2px solid var(--ink); }
-.dj-banner { height:380px; border:2px solid var(--ink); margin-bottom:2px; position:relative; overflow:hidden; }
-.dj-banner img { width:100%; height:100%; object-fit:cover; object-position:center 30%; filter:saturate(0.5) contrast(1.2) brightness(0.85); }
-.dj-banner::after { content:''; position:absolute; inset:0; background:linear-gradient(to right,rgba(212,43,30,0.4) 0%,rgba(26,20,16,0.2) 100%); }
-.dj-banner-label { position:absolute; bottom:32px; left:40px; z-index:2; }
-.dj-banner-label .t { font-family:'Anton',sans-serif; font-size:2.4rem; color:var(--white); text-transform:uppercase; letter-spacing:0.04em; }
-.dj-banner-label .s { font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.65); display:block; margin-bottom:6px; }
-.content-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; border:2px solid var(--ink); border-top:none; }
-.c-card { background:var(--white); padding:40px 36px; border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); transition:background 0.15s; }
-.c-card:hover { background:var(--red); color:var(--white); }
-.c-card:hover .c-card-fmt, .c-card:hover li { color:rgba(255,255,255,0.7); }
-.c-card:hover li::before { color:rgba(255,255,255,0.4); }
-.c-card-type { font-family:'Anton',sans-serif; font-size:1.3rem; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px; }
-.c-card-fmt { font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; display:block; }
-.c-card ul { list-style:none; display:flex; flex-direction:column; gap:7px; }
-.c-card ul li { font-size:0.82rem; color:#5A4E48; padding-left:12px; position:relative; line-height:1.5; }
-.c-card ul li::before { content:'→'; position:absolute; left:0; color:var(--muted); font-size:0.65rem; }
-.event-box { margin-top:48px; display:grid; grid-template-columns:1fr 1fr; gap:2px; border:2px solid var(--ink); }
-.e-box { padding:40px; background:var(--white); border-right:1px solid var(--rule); }
-.e-box:last-child { border-right:none; }
-.e-box-title { font-family:'Anton',sans-serif; font-size:1.1rem; text-transform:uppercase; letter-spacing:0.04em; border-bottom:2px solid var(--red); padding-bottom:12px; margin-bottom:16px; display:inline-block; }
-.e-box p { font-size:0.85rem; color:#5A4E48; line-height:1.7; }
+/* ── PARTENARIAT ── */
+.partner-section{background:var(--white);border-top:2px solid var(--ink);}
+.offer-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;border:2px solid var(--ink);border-bottom:none;}
+.o-card{padding:40px;border-right:1px solid var(--rule);}
+.o-card:last-child{border-right:none;}
+.o-card:first-child{background:var(--red);}
+.o-card:first-child .o-label{color:rgba(255,255,255,0.55);}
+.o-card:first-child .o-price{color:var(--white);}
+.o-card:first-child .o-desc{color:rgba(255,255,255,0.72);}
+.o-card:nth-child(2){background:var(--off);}
+.o-card:last-child{background:var(--paper);}
+.o-label{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.o-price{font-family:'Anton',sans-serif;font-size:clamp(30px,3vw,48px);line-height:1;color:var(--ink);margin-bottom:16px;}
+.o-desc{font-size:0.8rem;color:#5A4E48;line-height:1.7;}
+.p-table{border:2px solid var(--ink);overflow:hidden;margin-bottom:2px;}
+.p-head{display:grid;grid-template-columns:160px 1fr 1fr 1fr;background:var(--ink);}
+.p-head div{padding:14px 20px;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);}
+.p-head div:nth-child(2),.p-head div:nth-child(3),.p-head div:nth-child(4){border-left:1px solid rgba(255,255,255,0.08);}
+.p-head div:nth-child(2){color:var(--white);}
+.p-head div:nth-child(3){color:rgba(255,255,255,0.7);}
+.p-row{display:grid;grid-template-columns:160px 1fr 1fr 1fr;border-top:1px solid var(--rule);transition:background 0.12s;}
+.p-row:hover{background:var(--off);}
+.p-row div{padding:12px 20px;font-size:0.8rem;color:#4A3E38;display:flex;align-items:center;gap:5px;line-height:1.4;}
+.p-row div:first-child{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--rule);}
+.p-row div:nth-child(3),.p-row div:nth-child(4){border-left:1px solid var(--rule);}
+.ck{color:var(--red);font-weight:700;}
+.dx{color:var(--rule);}
+.budget-total{padding:32px 40px;background:var(--ink);border:2px solid var(--ink);display:flex;align-items:center;justify-content:space-between;gap:32px;}
+.bt-label{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:6px;}
+.bt-price{font-family:'Anton',sans-serif;font-size:3rem;color:var(--white);line-height:1;}
+.bt-price em{color:var(--red-light);font-style:normal;}
+.bt-desc{font-size:0.8rem;color:rgba(255,255,255,0.42);line-height:1.7;max-width:460px;}
 
-/* PARTENARIAT */
-.partner-section { background:var(--white); border-top:2px solid var(--ink); }
-.p-table { border:2px solid var(--ink); overflow:hidden; margin-bottom:48px; }
-.p-head { display:grid; grid-template-columns:180px 1fr 1fr; background:var(--ink); }
-.p-head div { padding:18px 28px; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.5); }
-.p-head div:nth-child(2), .p-head div:nth-child(3) { border-left:1px solid rgba(255,255,255,0.08); }
-.p-head div:nth-child(2) { color:var(--white); }
-.p-head div:nth-child(3) { color:rgba(255,255,255,0.7); }
-.p-row { display:grid; grid-template-columns:180px 1fr 1fr; border-top:1px solid var(--rule); transition:background 0.12s; }
-.p-row:hover { background:var(--off); }
-.p-row div { padding:15px 28px; font-size:0.85rem; color:#4A3E38; display:flex; align-items:center; gap:6px; line-height:1.4; }
-.p-row div:first-child { font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); border-right:1px solid var(--rule); }
-.p-row div:nth-child(3) { border-left:1px solid var(--rule); }
-.ck { color:var(--red); font-weight:700; }
-.dx { color:var(--rule); }
-.offer-cards { display:grid; grid-template-columns:1fr 1fr; gap:2px; border:2px solid var(--ink); border-bottom:none; }
-.o-card { padding:48px; border-right:1px solid var(--rule); }
-.o-card:last-child { border-right:none; }
-.o-card:first-child { background:var(--red); }
-.o-card:first-child .o-label { color:rgba(255,255,255,0.6); }
-.o-card:first-child .o-price { color:var(--white); }
-.o-card:first-child .o-desc { color:rgba(255,255,255,0.75); }
-.o-card:last-child { background:var(--off); }
-.o-label { font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
-.o-price { font-family:'Anton',sans-serif; font-size:clamp(36px,4vw,56px); line-height:1; color:var(--ink); margin-bottom:20px; }
-.o-desc { font-size:0.85rem; color:#5A4E48; line-height:1.7; }
-.budget-total { padding:40px 48px; background:var(--ink); border:2px solid var(--ink); display:flex; align-items:center; justify-content:space-between; gap:40px; }
-.bt-label { font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:8px; }
-.bt-price { font-family:'Anton',sans-serif; font-size:3.5rem; color:var(--white); line-height:1; }
-.bt-price em { color:var(--red-light); font-style:normal; }
-.bt-desc { font-size:0.82rem; color:rgba(255,255,255,0.45); line-height:1.7; max-width:480px; }
+/* ── CTA ── */
+.cta-section{position:relative;border-top:2px solid var(--ink);padding:96px 64px;display:flex;flex-direction:column;align-items:flex-start;overflow:hidden;min-height:65vh;}
+.cta-section .photo-bg img{filter:saturate(0.18) contrast(1.35) brightness(0.32);}
+.cta-section .photo-bg::after{background:rgba(195,30,18,0.68);}
+.cta-inner{position:relative;z-index:1;}
+.cta-label{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.cta-label::before{content:'';width:16px;height:2px;background:rgba(255,255,255,0.45);}
+.cta-title{font-family:'Anton',sans-serif;font-size:clamp(52px,8.5vw,108px);line-height:0.9;text-transform:uppercase;color:var(--white);max-width:780px;margin-bottom:40px;}
+.cta-deadline{display:inline-flex;align-items:center;gap:12px;padding:14px 24px;border:2px solid rgba(255,255,255,0.25);margin-bottom:36px;}
+.cta-deadline span{font-family:'Anton',sans-serif;font-size:0.85rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);}
+.cta-deadline strong{color:var(--white);font-style:normal;}
+.cta-contacts{display:flex;gap:0;border:2px solid rgba(255,255,255,0.25);}
+.cta-c{padding:24px 40px;border-right:1px solid rgba(255,255,255,0.18);}
+.cta-c:last-child{border-right:none;}
+.cta-c-lbl{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:6px;}
+.cta-c-name{font-family:'Anton',sans-serif;font-size:1.1rem;text-transform:uppercase;color:var(--white);letter-spacing:0.05em;}
+.cta-c-val{font-size:0.8rem;color:rgba(255,255,255,0.7);margin-top:3px;}
 
-/* CTA */
-.cta-section { position:relative; border-top:2px solid var(--ink); padding:120px 64px; display:flex; flex-direction:column; align-items:flex-start; overflow:hidden; min-height:80vh; }
-.cta-section .photo-bg img { filter:saturate(0.2) contrast(1.3) brightness(0.35); }
-.cta-section .photo-bg::after { background:rgba(200,35,20,0.65); }
-.cta-inner { position:relative; z-index:1; }
-.cta-label { font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:20px; display:flex; align-items:center; gap:10px; }
-.cta-label::before { content:''; width:16px; height:2px; background:rgba(255,255,255,0.5); }
-.cta-title { font-family:'Anton',sans-serif; font-size:clamp(56px,9vw,120px); line-height:0.9; text-transform:uppercase; color:var(--white); max-width:800px; margin-bottom:48px; }
-.cta-contacts { display:flex; gap:0; border:2px solid rgba(255,255,255,0.3); }
-.cta-c { padding:32px 48px; border-right:1px solid rgba(255,255,255,0.2); }
-.cta-c:last-child { border-right:none; }
-.cta-c-lbl { font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-bottom:8px; }
-.cta-c-name { font-family:'Anton',sans-serif; font-size:1.2rem; text-transform:uppercase; color:var(--white); letter-spacing:0.05em; }
-.cta-c-val { font-size:0.85rem; color:rgba(255,255,255,0.75); margin-top:4px; }
+footer{padding:20px 64px;background:var(--ink);display:flex;justify-content:space-between;align-items:center;}
+footer .fl{font-family:'Anton',sans-serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.28);}
+footer .fl em{color:var(--red-light);font-style:normal;}
+footer .fr{font-size:0.7rem;color:rgba(255,255,255,0.18);}
 
-footer { padding:24px 64px; background:var(--ink); display:flex; justify-content:space-between; align-items:center; }
-footer .fl { font-family:'Anton',sans-serif; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.3); }
-footer .fl em { color:var(--red-light); font-style:normal; }
-footer .fr { font-size:0.72rem; letter-spacing:0.1em; color:rgba(255,255,255,0.2); }
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.reveal.vis{opacity:1;transform:none;}
 
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-@keyframes slideUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
-.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.65s ease, transform 0.65s ease; }
-.reveal.vis { opacity:1; transform:none; }
-
-@media (max-width:960px) {
-  nav ul { display:none; }
-  nav { padding:0 24px; }
-  .hero { grid-template-columns:1fr; }
-  .hero-left, .hero-right { padding:60px 32px; }
-  .hero-right { border-left:none; border-top:2px solid var(--ink); }
-  .photo-strip { grid-template-columns:1fr; height:auto; }
-  .photo-strip .photo-frame { height:220px; border-right:none; border-bottom:2px solid var(--ink); }
-  .s-wrap { padding:72px 28px; }
-  .concept-cols, .aud-grid, .offer-cards, .territoire-grid, .testing-cols, .chalet-hero { grid-template-columns:1fr; gap:0; }
-  .territoire-view { border-left:2px solid var(--ink); height:260px; }
-  .territoire-info-cards { grid-template-columns:1fr 1fr; }
-  .chalet-info { border-left:none; border-top:2px solid var(--ink); }
-  .music-journey { grid-template-columns:1fr 1fr; }
-  .acteurs-grid { grid-template-columns:1fr 1fr; }
-  .stats-grid, .expo-timeline, .content-grid, .expo-route { grid-template-columns:1fr; }
-  .expo-day { border-right:none; border-bottom:1px solid var(--rule); }
-  .event-box { grid-template-columns:1fr; }
-  .p-head, .p-row { grid-template-columns:1fr; }
-  .p-head div:nth-child(2), .p-head div:nth-child(3), .p-row div:nth-child(3) { border-left:none; border-top:1px solid rgba(255,255,255,0.05); }
-  .p-row div:first-child { border-right:none; }
-  .budget-total { flex-direction:column; gap:20px; }
-  .cta-section { padding:80px 28px; }
-  .cta-contacts { flex-direction:column; }
-  .cta-c { border-right:none; border-bottom:1px solid rgba(255,255,255,0.2); }
-  footer { padding:20px 28px; flex-direction:column; gap:8px; text-align:center; }
+@media(max-width:960px){
+  nav ul{display:none;}nav{padding:0 24px;}
+  .urgency-bar{padding:10px 24px;flex-direction:column;gap:4px;text-align:center;}
+  .hero{grid-template-columns:1fr;}
+  .hero-left,.hero-right{padding:56px 28px;}
+  .hero-right{border-left:none;border-top:2px solid var(--ink);}
+  .photo-strip{grid-template-columns:1fr;height:auto;}
+  .photo-strip .photo-frame{height:180px;border-right:none;border-bottom:2px solid var(--ink);}
+  .s-wrap{padding:60px 24px;}
+  .team-grid,.proof-grid,.saturday-grid,.concept-cols,.aud-grid,.offer-cards{grid-template-columns:1fr;gap:0;}
+  .trace-container,.chalet-grid,.expo-timeline,.content-grid,.expo-route,.music-row,.proof-editions{grid-template-columns:1fr;}
+  .trace-elev-wrap,.chalet-info{border-left:none;border-top:2px solid var(--ink);}
+  .expo-day{border-right:none;border-bottom:1px solid var(--rule);}
+  .p-head,.p-row{grid-template-columns:1fr;}
+  .p-head div:nth-child(n+2),.p-row div:nth-child(n+2){border-left:none;border-top:1px solid rgba(255,255,255,0.05);}
+  .p-row div:first-child{border-right:none;}
+  .budget-total{flex-direction:column;gap:16px;}
+  .resonance-row{grid-template-columns:1fr;gap:16px;}
+  .cta-section{padding:64px 24px;}
+  .cta-contacts{flex-direction:column;}
+  .cta-c{border-right:none;border-bottom:1px solid rgba(255,255,255,0.18);}
+  footer{padding:16px 24px;flex-direction:column;gap:6px;text-align:center;}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-brand">Tout Terrain Club<em>™</em></div>
   <ul>
-    <li><a href="#concept">Concept</a></li>
-    <li><a href="#territoire">Territoire</a></li>
-    <li><a href="#expedition">Expédition</a></li>
+    <li><a href="#team">Le trio</a></li>
+    <li><a href="#preuves">Preuves</a></li>
+    <li><a href="#trace">Trace</a></li>
+    <li><a href="#expedition">Expé</a></li>
+    <li><a href="#samedi">Le samedi</a></li>
     <li><a href="#chalet">Chalet</a></li>
-    <li><a href="#musique">Musique</a></li>
-    <li><a href="#testing">Communauté</a></li>
     <li><a href="#partenariat">Partenariat</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
+<!-- URGENCY BAR -->
+<div class="urgency-bar">
+  <span>⏳ Deadline partenaires — <strong>fin avril 2026</strong></span>
+  <strong>· Les places sont limitées ·</strong>
+</div>
+
 <!-- HERO -->
 <div class="hero">
   <div class="hero-left">
-    <div class="photo-bg"><img src="_DSC0536__1_.jpg" alt="TTC runners Nice"></div>
+    <div class="photo-bg"><img src="_DSC0536__1_.jpg" alt=""></div>
     <div class="hero-left-content">
-      <p class="hero-tag">Tout Terrain Club — Édition 2026</p>
-      <h1 class="hero-title">Trail<br><span style="color:rgba(255,255,255,0.3)">/</span>To<br>Techno<span style="font-size:0.35em;vertical-align:super;opacity:0.5">™</span></h1>
-      <p class="hero-subtitle">De la mer à 3 143m. Du bitume de Nice au sommet du Mercantour — avec de la techno au chalet, et le territoire comme terrain de jeu.</p>
+      <p class="hero-eyebrow">Tout Terrain Club · Nice · Édition 2026</p>
+      <h1 class="hero-title">Trail<br>to<br>Techno<span style="font-size:0.3em;vertical-align:super;opacity:0.45">™</span></h1>
+      <p class="hero-tagline">On part à pied de la mer. On monte jusqu'à 3 143m. Et on finit en soirée techno dans un chalet du Mercantour. En août 2026.</p>
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-right-top">
-      <div class="hero-date"><small>Date de l'expédition</small>6 — 9<br>Août<br>2026</div>
-      <p class="hero-pitch"><strong>Trail to Techno™</strong> est le concept signature du Tout Terrain Club — une expédition trail qui sublime le territoire niçois et alpin, de la promenade des Anglais au sommet le plus haut du Mercantour, avec la musique comme fil conducteur.</p>
+    <div>
+      <div class="hero-date"><small>6 au 9 août 2026</small>Nice<br>→<br>Gelas</div>
+      <p class="hero-desc">Trail to Techno™, c'est l'expédition qui n'existait pas. <strong>108.9km depuis la mer, 7 500m de dénivelé, le sommet le plus haut du Mercantour</strong> — et une soirée techno à l'arrivée avec toute la communauté.</p>
     </div>
     <div class="hero-kpis">
-      <div class="kpi"><div class="kpi-n">110km</div><div class="kpi-l">Nice → Gelas</div></div>
-      <div class="kpi"><div class="kpi-n">3 143m</div><div class="kpi-l">Sommet du Gelas</div></div>
-      <div class="kpi"><div class="kpi-n">7 500<small style="font-size:0.5em">D+</small></div><div class="kpi-l">Dénivelé positif</div></div>
-      <div class="kpi"><div class="kpi-n">312<small style="font-size:0.5em">+</small></div><div class="kpi-l">Membres à Nice</div></div>
+      <div class="kpi"><div class="kpi-n">108.9km</div><div class="kpi-l">Nice → Gelas</div></div>
+      <div class="kpi"><div class="kpi-n">3 143m</div><div class="kpi-l">Sommet</div></div>
+      <div class="kpi"><div class="kpi-n">7 500<small style="font-size:0.5em">D+</small></div><div class="kpi-l">Dénivelé</div></div>
+      <div class="kpi"><div class="kpi-n">312<small style="font-size:0.5em">+</small></div><div class="kpi-l">Membres Nice</div></div>
     </div>
   </div>
 </div>
 
 <!-- PHOTO STRIP -->
 <div class="photo-strip">
-  <div class="photo-frame photo-overlay-red"><img src="_DSC0340.jpg" alt="TTC port de Nice"></div>
-  <div class="photo-frame photo-overlay-red"><img src="8.png" alt="TTC drapeau"></div>
-  <div class="photo-frame photo-overlay-red"><img src="DSC03191.jpg" alt="TTC trail"></div>
+  <div class="photo-frame photo-overlay"><img src="_DSC0340.jpg" alt=""></div>
+  <div class="photo-frame photo-overlay"><img src="8.png" alt=""></div>
+  <div class="photo-frame photo-overlay"><img src="DSC03191.jpg" alt=""></div>
 </div>
+
+<!-- TEAM -->
+<section class="team-section reveal" id="team">
+  <div class="s-wrap">
+    <div class="s-label">Qui on est</div>
+    <div class="s-title">Trois potes.<br><em>Un projet de fou.</em></div>
+    <p class="s-intro">Le Tout Terrain Club c'est une asso fondée en juillet 2024 à Nice. Pas un media, pas une agence — une communauté de coureurs qui s'est mise à faire des choses que personne ne faisait.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-role">Président · Fondateur</div>
+        <div class="team-name">Alexandre<br>Dussourd</div>
+        <p class="team-bio">L'instigateur. C'est son idée de ne plus courir seul qui a tout déclenché. Il porte la vision du projet, les partenariats et la stratégie de contenu.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-role">Secrétaire</div>
+        <div class="team-name">Julien<br>Cameron</div>
+        <p class="team-bio">Le moteur opérationnel du club. Il gère l'organisation des sorties, la logistique des événements et fait tourner la machine au quotidien.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-role">Trésorier</div>
+        <div class="team-name">Damien<br>Carini</div>
+        <p class="team-bio">Le rigueur du trio. En charge des finances, de la structure associative et de tout ce qui permet au projet d'exister concrètement.</p>
+      </div>
+    </div>
+    <div class="team-footer">
+      <p>On est trois à porter le projet — mais on est <strong>312 à Nice</strong>. Le TTC c'est eux aussi : les coureurs qui se lèvent à 5h du mat, qui partagent les sorties, qui font exister le concept sur le terrain. <strong>C'est cette communauté réelle que vous rejoignez en devenant partenaire.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- PREUVES -->
+<section class="proof-section reveal" id="preuves">
+  <div class="s-wrap">
+    <div class="s-label">Ce qu'on a déjà fait</div>
+    <div class="s-title">On ne part<br>pas de <em>zéro.</em></div>
+    <p class="s-intro">Trail to Techno™ a déjà deux éditions derrière lui. Deux fois on a prouvé que le concept fonctionne — sur le terrain et dans les chiffres.</p>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="proof-n">350k<sup>+</sup></div>
+        <div class="proof-label">Vues cumulées</div>
+        <div class="proof-desc">Reels, clips YouTube, stories — sur tous les contenus TTC depuis la création</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-n">250k</div>
+        <div class="proof-label">Vues Trail to Techno™</div>
+        <div class="proof-desc">Sur les contenus du concept signature uniquement — avant même cette édition</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-n">312<sup>+</sup></div>
+        <div class="proof-label">Membres actifs Nice</div>
+        <div class="proof-desc">Une communauté physique qui court ensemble chaque semaine depuis juillet 2024</div>
+      </div>
+    </div>
+    <div class="proof-editions">
+      <div class="edition-card">
+        <div class="edition-num">Édition 01 · 2024</div>
+        <div class="edition-title">Mont Chauve — 14km</div>
+        <p class="edition-desc">La première. Mode clip, départ Nice, sommet Mont Chauve, 860m D+, 15 participants. Un film court, 3 reels Instagram (85k vues), 1 clip YouTube (15k vues), une playlist Spotify, un DJ set complet de 40 minutes. La preuve que ça marche.</p>
+      </div>
+      <div class="edition-card">
+        <div class="edition-num">Édition 02 · Hiver 2025</div>
+        <div class="edition-title">Weekend alpin complet</div>
+        <p class="edition-desc">Format weekend tout compris — trail, yoga, raclette, soirée DJ dans un chalet hivernal. Ambiance exclusive, tous niveaux, partenaires Nutripure et Goxoa. 1 reel + 1 carrousel Instagram (66k vues). La communauté a adoré.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- CONCEPT -->
 <section class="concept-section reveal" id="concept">
   <div class="s-wrap">
-    <div class="s-label">Le projet</div>
-    <div class="s-title">Un concept<br>qui n'existait<br><em>pas encore</em></div>
+    <div class="s-label">L'édition 2026</div>
+    <div class="s-title">Nice →<br>Gelas.<br><em>108.9km.</em></div>
     <div class="concept-cols">
       <div class="concept-body">
-        <p><strong>Trail to Techno™</strong> est né d'une conviction simple : le trail et la musique électronique partagent le même ADN — l'effort collectif, la transe, le dépassement de soi. On a fusionné les deux.</p>
-        <p>Le Tout Terrain Club, fondé en juillet 2024 à Nice, est rapidement devenu la première communauté de trail passionnés de la région. <strong>Trail to Techno™</strong> a déjà généré plus de 250 000 vues cumulées sur deux éditions.</p>
-        <p>L'édition 2026 monte d'un cran : <strong>La Cime du Gelas (3 143m)</strong>, sommet iconique du Mercantour, 110km depuis la mer, une nuit en refuge, un DJ set sur la terrasse du chalet à Saint-Martin-Vésubie. Un format qui célèbre le territoire autant que l'effort.</p>
+        <p>L'édition 2026, c'est notre troisième — et de loin la plus grande. <strong>108.9km depuis la Promenade des Anglais jusqu'à la Cime du Gelas</strong>, point culminant du Mercantour à 3 143m. Un hommage au mythique "Prom to Gelas", cette aventure mer-montagne que des pionniers réalisaient à vélo, à pied et en escalade pure.</p>
+        <p>En 2026, on reprend cette trace avec les codes du trail moderne, un ancien <strong>"Piolet d'Or"</strong> pour guider l'ascension finale, et le collectif Résonance pour la soirée. Une expédition ancrée dans le territoire, construite avec ses acteurs locaux.</p>
         <div class="concept-pull">
-          <blockquote>"Ce n'est pas une course. C'est une célébration du territoire, entre nature, dépassement de soi et musique."</blockquote>
-          <cite>— Vision Tout Terrain Club</cite>
+          <blockquote>"Ce n'est pas une course. C'est une expédition qui célèbre le territoire, l'effort et les gens."</blockquote>
+          <cite>— Alexandre, Julien & Damien · Tout Terrain Club</cite>
         </div>
       </div>
-      <div class="concept-right-block">
-        <div class="concept-photo photo-frame photo-overlay-red">
-          <img src="8.png" alt="TTC flag" style="object-position:center 20%;">
-        </div>
+      <div class="concept-right">
+        <div class="concept-photo photo-frame photo-overlay"><img src="8.png" alt="" style="object-position:center 20%;"></div>
         <div class="concept-tags">
           <div class="c-tag">Trail off-piste <span class="c-tag-n">01</span></div>
-          <div class="c-tag">Territoire local <span class="c-tag-n">02</span></div>
+          <div class="c-tag">Mercantour <span class="c-tag-n">02</span></div>
           <div class="c-tag">Musique & culture <span class="c-tag-n">03</span></div>
-          <div class="c-tag">Mercantour <span class="c-tag-n">04</span></div>
-          <div class="c-tag">Communauté réelle <span class="c-tag-n">05</span></div>
+          <div class="c-tag">Communauté réelle <span class="c-tag-n">04</span></div>
+          <div class="c-tag">Acteurs locaux <span class="c-tag-n">05</span></div>
           <div class="c-tag">Hors-norme <span class="c-tag-n">06</span></div>
         </div>
       </div>
@@ -417,94 +490,21 @@ footer .fr { font-size:0.72rem; letter-spacing:0.1em; color:rgba(255,255,255,0.2
   </div>
 </section>
 
-<!-- TERRITOIRE -->
-<section class="territoire-section reveal" id="territoire">
+<!-- TRACE GPX -->
+<section class="trace-section reveal" id="trace">
   <div class="s-wrap">
-    <div class="s-label">Territoire & héritage</div>
-    <div class="s-title">Nice —<br>Mercantour.<br><em>Notre terrain.</em></div>
-    <p class="s-intro">Trail to Techno™ ne se contente pas de traverser le territoire — il le célèbre. Du port de Nice aux crêtes du Mercantour, chaque kilomètre raconte une histoire entre mer et montagne, urban et sauvage.</p>
-
-    <div class="territoire-grid">
-      <!-- Carte de la trace -->
-      <div class="territoire-map photo-frame" style="height:560px;">
-        <img src="map_trace.png" alt="Trace Nice Gelas" style="filter:saturate(0.9) contrast(1.05) brightness(1);">
-        <div class="territoire-map-label">Trace officielle — 110km</div>
+    <div class="s-label">La trace officielle</div>
+    <div class="s-title">La trace.<br><em>Mer à montagne.</em></div>
+    <p class="s-intro">108.9km depuis le port de Nice jusqu'à la Cime du Gelas. Chaque point sur cette carte c'est un vrai kilomètre à parcourir à pied.</p>
+    <div class="trace-container">
+      <div class="trace-map-wrap">
+        <canvas id="mapCanvas" height="500"></canvas>
       </div>
-      <div class="territoire-right">
-        <!-- Vue Gelas depuis la mer -->
-        <div class="territoire-view photo-frame">
-          <img src="gelas_view.png" alt="Gelas depuis la mer" style="filter:saturate(0.7) contrast(1.1) brightness(0.9);">
-          <div class="territoire-view-caption">
-            <span class="small">Visible depuis Nice — Cime du Gelas</span>
-            <span class="big">3 143m<br>depuis la mer.</span>
-          </div>
-        </div>
-        <div class="territoire-info-cards">
-          <div class="t-info">
-            <div class="t-info-icon">🏙️</div>
-            <div class="t-info-title">Nice</div>
-            <div class="t-info-desc">Point de départ. La promenade des Anglais, la ville, la mer. Le contraste total avec le sommet.</div>
-          </div>
-          <div class="t-info">
-            <div class="t-info-icon">🏔️</div>
-            <div class="t-info-title">Mercantour</div>
-            <div class="t-info-desc">Parc National. Terrain sauvage, préservé. L'un des plus beaux massifs des Alpes du Sud.</div>
-          </div>
-          <div class="t-info">
-            <div class="t-info-icon">🏘️</div>
-            <div class="t-info-title">Saint-Martin-Vésubie</div>
-            <div class="t-info-desc">Village emblématique de la Vésubie. Porte du Mercantour. Chalet Trail to Techno™ sur place.</div>
-          </div>
-          <div class="t-info">
-            <div class="t-info-icon">⛰️</div>
-            <div class="t-info-title">Cime du Gelas</div>
-            <div class="t-info-desc">3 143m. Plus haut sommet du Mercantour. Mythique "Prom to Gelas" — mer à montagne.</div>
-          </div>
-        </div>
+      <div class="trace-elev-wrap">
+        <div class="trace-elev-title">Profil d'élévation</div>
+        <canvas id="elevCanvas" height="175"></canvas>
+        <div class="trace-keypoints" id="keypoints"></div>
       </div>
-    </div>
-
-    <!-- Acteurs locaux -->
-    <div class="s-label" style="margin-top:64px;">Acteurs & partenaires locaux</div>
-    <p style="font-size:0.95rem;color:var(--muted);max-width:600px;line-height:1.7;margin-bottom:0;">Trail to Techno™ s'inscrit dans l'écosystème local. On travaille avec des acteurs du territoire, pas autour d'eux.</p>
-    <div class="acteurs-grid">
-      <div class="acteur-card">
-        <div class="acteur-icon">🏡</div>
-        <div class="acteur-name">Hébergement local</div>
-        <div class="acteur-desc">Chalet et refuge dans la vallée de la Vésubie. Économie locale, nuitées sur place.</div>
-      </div>
-      <div class="acteur-card">
-        <div class="acteur-icon">🥾</div>
-        <div class="acteur-name">Guides & montagne</div>
-        <div class="acteur-desc">Participation d'un ancien Piolet d'Or pour l'ascension finale. Expertise et légitimité.</div>
-      </div>
-      <div class="acteur-card">
-        <div class="acteur-icon">🎵</div>
-        <div class="acteur-name">DJs & collectifs</div>
-        <div class="acteur-desc">Collectif Resonance — artistes locaux niçois et régionaux. Scène électronique PACA.</div>
-      </div>
-      <div class="acteur-card">
-        <div class="acteur-icon">📸</div>
-        <div class="acteur-name">Production locale</div>
-        <div class="acteur-desc">Réalisateur et photographe basés à Nice. Images qui connaissent le terrain.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<section class="stats-section reveal" id="chiffres">
-  <div class="photo-bg"><img src="Capture_d_écran_2025-11-27_090758.png" alt="Vue drone"></div>
-  <div class="s-wrap stats-inner">
-    <div class="s-label">La communauté TTC</div>
-    <div class="s-title">Une audience<br><em>ultra-niche</em><br>engagée</div>
-    <div class="stats-grid">
-      <div class="stat-card"><div class="stat-n">1 257<sup>+</sup></div><div class="stat-l">Followers cumulés</div><div class="stat-d">Audience qualifiée trail & outdoor, Nice & PACA</div></div>
-      <div class="stat-card"><div class="stat-n">350k<sup>+</sup></div><div class="stat-l">Vues cumulées</div><div class="stat-d">Reels, clips YouTube, stories — formats courts et longs</div></div>
-      <div class="stat-card"><div class="stat-n">312<sup>+</sup></div><div class="stat-l">Membres actifs Nice</div><div class="stat-d">Coureurs de tous niveaux, community réelle et locale</div></div>
-      <div class="stat-card"><div class="stat-n">250k</div><div class="stat-l">Vues Trail to Techno™</div><div class="stat-d">Contenus dédiés au concept signature uniquement</div></div>
-      <div class="stat-card"><div class="stat-n">100k<sup>+</sup></div><div class="stat-l">Vues dernière édition</div><div class="stat-d">85k Instagram + 15k YouTube sur la sortie filmée</div></div>
-      <div class="stat-card"><div class="stat-n">2<sup>×</sup></div><div class="stat-l">Éditions réalisées</div><div class="stat-d">Mont Chauve 14km + weekend hivernal — concept validé</div></div>
     </div>
   </div>
 </section>
@@ -512,207 +512,165 @@ footer .fr { font-size:0.72rem; letter-spacing:0.1em; color:rgba(255,255,255,0.2
 <!-- EXPEDITION -->
 <section class="expo-section reveal" id="expedition">
   <div class="s-wrap">
-    <div class="s-label">L'expédition 2026</div>
-    <div class="s-title">3 jours.<br><em>110km.</em><br>1 sommet.</div>
-    <p class="s-intro">Une expédition de bout en bout — de la mer à 3 143m. Chaque étape a son identité, son rythme, son ambiance sonore. Un récit que personne n'a encore écrit.</p>
-
+    <div class="s-label">3 jours d'expédition</div>
+    <div class="s-title">Du bitume<br>au <em>sommet.</em></div>
     <div class="expo-photo-banner">
-      <img src="IMG20260124142816.jpg" alt="Expédition conditions réelles">
+      <img src="IMG20260124142816.jpg" alt="">
       <div class="expo-banner-label">
         <span class="small">Édition précédente — conditions terrain réelles</span>
         <span class="big">On sait ce que ça coûte.</span>
       </div>
     </div>
-
     <div class="expo-timeline">
       <div class="expo-day">
-        <div class="expo-day-num">J1</div>
-        <div class="expo-day-date">6 – 7 Août · Phase d'approche</div>
-        <div class="expo-day-title">80km / 6 000m D+</div>
+        <div class="expo-day-num">J1–2</div>
+        <div class="expo-day-date">6–7 Août · La phase d'approche</div>
+        <div class="expo-day-title">80km depuis Nice</div>
         <ul>
-          <li>Départ 18h00 depuis Nice</li>
-          <li>Crew expé de 10 à 16 personnes</li>
-          <li>Shop ouvert, musique & supporters</li>
-          <li>Arrivée refuge de Nice</li>
-          <li>Ambiance sonore : electro chill / voyage</li>
+          <li>Départ 18h depuis Nice</li>
+          <li>Team expé : 10 à 16 coureurs</li>
+          <li>Shop ouvert, musique, supporters</li>
+          <li class="highlight">Arrivée refuge de Nice — 2 218m</li>
         </ul>
       </div>
       <div class="expo-day">
         <div class="expo-day-num">J2</div>
-        <div class="expo-day-date">8 Août · Ascension & soirée</div>
-        <div class="expo-day-title">Cime du Gelas</div>
+        <div class="expo-day-date">8 Août · Le grand jour</div>
+        <div class="expo-day-title">Cime du Gélas — 3 143m</div>
         <ul>
-          <li>Départ refuge à 5h00</li>
-          <li>Sommet à 9h00 — 3 143m</li>
-          <li>Descente au chalet St-Martin-Vésubie</li>
-          <li>DJ set terrasse chalet — après-midi</li>
-          <li>Soirée techno — intérieur chalet</li>
+          <li>Départ refuge 5h00</li>
+          <li class="highlight">Sommet 9h00 — 3 143m</li>
+          <li>Descente au chalet SMV</li>
+          <li class="highlight">Communauté + testing + soirée</li>
         </ul>
       </div>
       <div class="expo-day">
         <div class="expo-day-num">J3</div>
-        <div class="expo-day-date">9 Août · Descente</div>
-        <div class="expo-day-title">Retour & récup</div>
+        <div class="expo-day-date">9 Août · Retour</div>
+        <div class="expo-day-title">Récupération</div>
         <ul>
-          <li>Journée repos collective</li>
-          <li>Testing produits avec communauté</li>
+          <li>Repos collectif SMV</li>
+          <li>Testing produits suite</li>
           <li>Redescente sur Nice</li>
-          <li>Récupération en communauté</li>
         </ul>
       </div>
     </div>
     <div class="expo-route">
-      <div class="route-s"><div class="route-s-n">110km</div><div class="route-s-l">Distance totale<br>Nice → Gelas</div></div>
-      <div class="route-s"><div class="route-s-n">7 500<span style="font-size:0.55em;opacity:0.5">D+</span></div><div class="route-s-l">Dénivelé positif</div></div>
-      <div class="route-s"><div class="route-s-n">3 143m</div><div class="route-s-l">Point culminant<br>Cime du Gelas</div></div>
-      <div class="route-s"><div class="route-s-n">St-Martin</div><div class="route-s-l">Chalet<br>Vésubie</div></div>
+      <div class="route-s"><div class="route-s-n">108.9km</div><div class="route-s-l">Distance totale<br>Nice → Gelas</div></div>
+      <div class="route-s"><div class="route-s-n">7 500<span style="font-size:0.5em;opacity:0.5">D+</span></div><div class="route-s-l">Dénivelé positif</div></div>
+      <div class="route-s"><div class="route-s-n">3 143m</div><div class="route-s-l">Cime du Gélas<br>sommet</div></div>
+      <div class="route-s"><div class="route-s-n">St-Martin</div><div class="route-s-l">Vésubie<br>Le chalet</div></div>
     </div>
   </div>
 </section>
 
-<!-- CHALET & DJ -->
+<!-- SAMEDI — LE JOUR COMMUNAUTÉ -->
+<section class="saturday-section reveal" id="samedi">
+  <div class="s-wrap">
+    <div class="s-label">Samedi 8 août — Saint-Martin-Vésubie</div>
+    <div class="s-title">Le jour où<br>tout le monde<br><em>est là.</em></div>
+    <p class="s-intro" style="color:rgba(255,255,255,0.72)">Le samedi, la communauté TTC converge sur Saint-Martin-Vésubie. Pas besoin de faire 110km. On vient rejoindre l'aventure — courir, tester, soutenir, célébrer.</p>
+    <div class="saturday-grid">
+      <div class="sat-card">
+        <div class="sat-icon">🏃</div>
+        <div class="sat-time">Matin</div>
+        <div class="sat-title">Boucles trail</div>
+        <p class="sat-desc">10 à 25km autour de SMV. Tous niveaux. Certains peuvent rejoindre la team expé sur une portion de la descente finale.</p>
+      </div>
+      <div class="sat-card">
+        <div class="sat-icon">👟</div>
+        <div class="sat-time">Toute la journée</div>
+        <div class="sat-title">Testing produits</div>
+        <p class="sat-desc">Stand partenaire sur place. Chaussures, vêtements, nutrition testés en conditions réelles par 30 à 50 coureurs. Feedback authentique, filmé.</p>
+      </div>
+      <div class="sat-card">
+        <div class="sat-icon">🏔️</div>
+        <div class="sat-time">Après-midi</div>
+        <div class="sat-title">Arrivée de la team</div>
+        <p class="sat-desc">La team expé descend du Gelas. La communauté les attend au chalet. Le DJ joue en terrasse. L'émotion de l'arrivée, filmée.</p>
+      </div>
+      <div class="sat-card">
+        <div class="sat-icon">🎧</div>
+        <div class="sat-time">Soir</div>
+        <div class="sat-title">Soirée techno</div>
+        <p class="sat-desc">DJ set qui passe de mélodique en terrasse à techno à l'intérieur. Tout le monde célèbre ensemble — team expé et communauté.</p>
+      </div>
+    </div>
+    <div class="sat-highlight">
+      <div class="sat-highlight-icon">✨</div>
+      <div>
+        <h4>Pour une marque trail, c'est le moment clé</h4>
+        <p>30 à 50 coureurs engagés qui testent vos produits en conditions réelles, un stand brandé, des retours filmés, et la visibilité de l'arrivée d'une expédition. <strong>C'est le type d'activation qu'on ne peut pas fabriquer en studio.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALET + MUSIQUE -->
 <section class="chalet-section reveal" id="chalet">
   <div class="s-wrap">
-    <div class="s-label">Le chalet Trail to Techno™</div>
-    <div class="s-title">Saint-Martin-<br>Vésubie.<br><em>Le QG.</em></div>
-
-    <div class="chalet-hero">
+    <div class="s-label">Saint-Martin-Vésubie · La musique</div>
+    <div class="s-title">Un chalet.<br><em>Une soirée.</em><br>Un collectif.</div>
+    <div class="chalet-grid">
       <div class="chalet-img">
-        <img src="Capture_d_écran_2025-11-27_090452.png" alt="DJ set terrasse">
+        <img src="Capture_d_écran_2025-11-27_090452.png" alt="">
         <div class="chalet-img-caption">
-          <span class="s">Soirée Trail to Techno™</span>
-          <span class="t">Le DJ set.<br>D'abord en terrasse,<br>puis en soirée.</span>
+          <span class="s">Soirée Trail to Techno™ — édition précédente</span>
+          <span class="t">D'abord en terrasse.<br>Puis toute la nuit.</span>
         </div>
       </div>
       <div class="chalet-info">
-        <h3>Le chalet de<br><em>l'expédition</em></h3>
-        <p>Saint-Martin-Vésubie — village emblématique de la Vésubie, porte du Mercantour. C'est ici que la team expé retrouve la communauté après 3 jours de montagne. Le chalet devient le lieu de convergence : repos, fête, célébration du territoire.</p>
+        <h3>Saint-Martin-<br><em>Vésubie</em></h3>
+        <p>Village emblématique, porte du Mercantour. L'expédition fait vivre le territoire — hébergement local, restauration locale, acteurs locaux.</p>
         <div class="chalet-detail">
           <div class="chalet-detail-icon">🌅</div>
           <div class="chalet-detail-text">
             <strong>DJ set terrasse — après l'ascension</strong>
-            <span>Le DJ joue en extérieur, sur la terrasse, dans la lumière de l'après-midi. Ambiance progressive, chill to deep — on redescend doucement de l'effort.</span>
+            <span>Lumière dorée sur les montagnes. Melodic techno progressif. On savoure ensemble d'avoir été au bout.</span>
           </div>
         </div>
         <div class="chalet-detail">
           <div class="chalet-detail-icon">🎧</div>
           <div class="chalet-detail-text">
-            <strong>Soirée techno — intérieur chalet</strong>
-            <span>Quand la nuit tombe, on rentre. Le chalet devient club. Set techno, lumières, communauté — la célébration du sommet continue.</span>
-          </div>
-        </div>
-        <div class="chalet-detail">
-          <div class="chalet-detail-icon">📍</div>
-          <div class="chalet-detail-text">
-            <strong>Saint-Martin-Vésubie</strong>
-            <span>Village ancré dans le territoire. Hébergement local, restauration locale. L'expédition fait vivre la destination.</span>
+            <strong>Soirée intérieur — la nuit</strong>
+            <span>Quand la nuit tombe, le chalet devient club. Techno, lumières, 40 à 60 personnes. La célébration méritée.</span>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- MUSIQUE -->
-<section class="music-section reveal" id="musique">
-  <div class="s-wrap">
-    <div class="s-label">Le voyage sonore</div>
-    <div class="s-title">La musique suit<br>l'effort.<br><em>Étape par étape.</em></div>
-    <p class="s-intro">Trail to Techno™ n'est pas juste "une course avec de la techno à l'arrivée". La musique est pensée comme un voyage — elle accompagne chaque phase de l'expédition et sublime chaque moment.</p>
-
-    <div class="music-journey">
+    <!-- Music journey condensé -->
+    <div class="music-row" style="margin-top:2px;">
       <div class="music-step">
-        <span class="music-phase">Phase 1 — Départ Nice</span>
+        <span class="music-phase">Départ Nice</span>
         <div class="music-name">Electro Chill</div>
         <div class="music-sub">18h — Nuit</div>
-        <div class="music-desc">Le départ depuis Nice. Lumières de la ville, mer derrière soi. Ambiance douce, hypnotique. On commence à entrer dans la bulle.</div>
-        <span class="music-arrow">→</span>
       </div>
       <div class="music-step">
-        <span class="music-phase">Phase 2 — Montée</span>
+        <span class="music-phase">Montée</span>
         <div class="music-name">Deep & Groove</div>
         <div class="music-sub">Nuit — Aube</div>
-        <div class="music-desc">Les premières heures de montagne. Rythme qui s'installe, effort qui monte. Grooves profonds pour tenir dans la nuit.</div>
-        <span class="music-arrow">→</span>
       </div>
       <div class="music-step">
-        <span class="music-phase">Phase 3 — Sommet</span>
-        <div class="music-name">Silence & Air</div>
-        <div class="music-sub">Gelas 3 143m</div>
-        <div class="music-desc">Le silence du sommet. La nature reprend ses droits. Pas besoin de musique ici — le paysage parle seul.</div>
-        <span class="music-arrow">→</span>
+        <span class="music-phase">Sommet</span>
+        <div class="music-name">Silence</div>
+        <div class="music-sub">3 143m</div>
       </div>
       <div class="music-step">
-        <span class="music-phase">Phase 4 — Terrasse chalet</span>
+        <span class="music-phase">Terrasse chalet</span>
         <div class="music-name">Melodic Techno</div>
         <div class="music-sub">Après-midi</div>
-        <div class="music-desc">Le DJ s'installe en terrasse. Lumière dorée, montagnes en fond. Mélodique, progressif — on savoure d'avoir été au bout.</div>
-        <span class="music-arrow">→</span>
       </div>
       <div class="music-step">
-        <span class="music-phase">Phase 5 — Soirée</span>
+        <span class="music-phase">Soirée</span>
         <div class="music-name">Techno</div>
-        <div class="music-sub">Nuit — Chalet</div>
-        <div class="music-desc">Le climax. La nuit, le chalet, la communauté. Techno directe, sans compromis. La célébration qu'on mérite après 110km.</div>
-        <span class="music-arrow">→</span>
+        <div class="music-sub">Nuit · Chalet</div>
       </div>
     </div>
-    <div class="music-note">
-      <div class="music-note-icon">🎵</div>
-      <p><strong>Collectif Resonance</strong> — partenaire musical de Trail to Techno™. DJs et artistes de la scène électronique niçoise et PACA. Une playlist dédiée Spotify par édition. La musique n'est pas un décor — c'est une composante de l'expédition au même titre que les chaussures ou la carte IGN.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TESTING COMMUNAUTÉ -->
-<section class="testing-section reveal" id="testing">
-  <div class="s-wrap">
-    <div class="s-label">Communauté & testing</div>
-    <div class="s-title">La communauté<br>fait partie<br><em>de l'aventure.</em></div>
-
-    <div class="testing-cols">
-      <div class="testing-body">
-        <p>Trail to Techno™ 2026 n'est pas réservé à la team expé. <strong>La communauté TTC est au cœur du projet</strong> — elle soutient, elle teste, elle célèbre.</p>
-        <p>Le chalet à Saint-Martin-Vésubie devient le point de ralliement : les membres de la communauté rejoignent l'équipe le J2, en mode <strong>supporters et testeurs</strong>. Ils font des boucles trail sur place pendant que la team expé descend du sommet.</p>
-        <p>C'est aussi là que les <strong>produits partenaires sont testés en conditions réelles</strong> — par des coureurs de tous niveaux, avec des retours authentiques, filmés, exploitables.</p>
-      </div>
-      <div class="testing-blocks">
-        <div class="test-block">
-          <div class="test-block-icon">🏃</div>
-          <div class="test-block-content">
-            <strong>Boucles trail communauté</strong>
-            <p>Parcours de 10 à 25km autour de Saint-Martin-Vésubie. Tous niveaux. Pendant que la team expé finit l'ascension.</p>
-          </div>
-        </div>
-        <div class="test-block">
-          <div class="test-block-icon">👟</div>
-          <div class="test-block-content">
-            <strong>Testing produits sur place</strong>
-            <p>Chaussures, vêtements, nutrition — testés en conditions réelles par 30 à 50 coureurs. Feedback authentique, filmé.</p>
-          </div>
-        </div>
-        <div class="test-block">
-          <div class="test-block-icon">📸</div>
-          <div class="test-block-content">
-            <strong>Contenu communautaire</strong>
-            <p>Photos et vidéos des supporters et testeurs. Contenu organique qui s'ajoute au contenu pro de l'expé.</p>
-          </div>
-        </div>
-        <div class="test-block">
-          <div class="test-block-icon">🎉</div>
-          <div class="test-block-content">
-            <strong>Convergence au chalet</strong>
-            <p>Team expé + communauté se retrouvent au chalet. La fête est collective. Le DJ set réunit tout le monde.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="supporter-banner">
-      <div class="supporter-banner-icon">🏔️</div>
+    <div class="resonance-row">
+      <div class="resonance-name">Réso<em>nance</em></div>
       <div>
-        <h4>Rejoindre l'aventure depuis le chalet</h4>
-        <p>Le 8 août, la communauté TTC converge sur Saint-Martin-Vésubie. Pas besoin de faire 110km — on peut venir supporter, courir les boucles locales, tester le matériel, et célébrer avec l'équipe à l'arrivée. <strong>C'est ça, Trail to Techno™ : une expédition qui rassemble, pas qui sélectionne.</strong></p>
+        <p class="resonance-text"><strong>Le collectif musical de Trail to Techno™.</strong> DJs et artistes de la scène électronique locale — ils construisent le voyage sonore de bout en bout. Une playlist Spotify dédiée par édition.</p>
+        <a class="resonance-link" href="https://www.instagram.com/resonancemusic_" target="_blank">→ @resonancemusic_ sur Instagram</a>
       </div>
     </div>
   </div>
@@ -721,16 +679,16 @@ footer .fr { font-size:0.72rem; letter-spacing:0.1em; color:rgba(255,255,255,0.2
 <!-- AUDIENCE -->
 <section class="audience-section reveal" id="audience">
   <div class="s-wrap">
-    <div class="s-label">Audience & reach</div>
-    <div class="s-title">La tribu<br>qu'on a<br><em>construite</em></div>
+    <div class="s-label">L'audience TTC</div>
+    <div class="s-title">Une communauté<br>qu'on ne peut<br><em>pas acheter.</em></div>
     <div class="aud-grid">
       <div>
-        <div class="aud-photo photo-frame photo-overlay-red"><img src="_DSC0340.jpg" alt="Communauté TTC Nice"></div>
-        <p class="aud-body">Une audience impossible à acheter autrement : des passionnés de trail et de culture urbaine, 20–40 ans, Nice et PACA. Une communauté réelle, physique. Les équipements testés en expédition deviennent des références dans la communauté.</p>
+        <div class="aud-photo photo-frame photo-overlay"><img src="_DSC0340.jpg" alt=""></div>
+        <p class="aud-body">20–40 ans, Nice et PACA. Passionnés de trail, d'outdoor et de musique électronique. Ils courent ensemble chaque semaine, ils font confiance aux marques qui vivent l'expérience avec eux — pas à celles qui la sponsorisent de loin.</p>
         <div class="pills">
           <span class="pill on">Trail & Ultra</span>
-          <span class="pill on">Culture Outdoor</span>
-          <span class="pill on">Musique Électro</span>
+          <span class="pill on">Outdoor</span>
+          <span class="pill on">Électro</span>
           <span class="pill">Nice & PACA</span>
           <span class="pill">20–40 ans</span>
           <span class="pill">Urbain & Montagne</span>
@@ -738,14 +696,14 @@ footer .fr { font-size:0.72rem; letter-spacing:0.1em; color:rgba(255,255,255,0.2
       </div>
       <div>
         <div class="reach-table">
-          <div class="reach-row"><span class="reach-p">Instagram</span><span class="reach-n">800<small>+ suiveurs</small></span></div>
-          <div class="reach-row"><span class="reach-p">YouTube</span><span class="reach-n">457<small>+ abonnés</small></span></div>
+          <div class="reach-row"><span class="reach-p">Instagram</span><span class="reach-n">— <small>à mettre à jour</small></span></div>
+          <div class="reach-row"><span class="reach-p">YouTube</span><span class="reach-n">— <small>à mettre à jour</small></span></div>
           <div class="reach-row"><span class="reach-p">Membres IRL</span><span class="reach-n">312<small>+ Nice</small></span></div>
           <div class="reach-row"><span class="reach-p">Vues cumulées</span><span class="reach-n">350k<small>+</small></span></div>
           <div class="reach-row"><span class="reach-p">Vues T2T</span><span class="reach-n">250k</span></div>
         </div>
-        <div class="photo-frame photo-overlay-red" style="height:280px;margin-top:2px;border:2px solid var(--ink);">
-          <img src="_DSC0536__1_.jpg" alt="TTC runners Nice">
+        <div class="photo-frame photo-overlay" style="height:240px;margin-top:2px;border:2px solid var(--ink);">
+          <img src="_DSC0536__1_.jpg" alt="">
         </div>
       </div>
     </div>
@@ -755,32 +713,22 @@ footer .fr { font-size:0.72rem; letter-spacing:0.1em; color:rgba(255,255,255,0.2
 <!-- CONTENUS -->
 <section class="content-section reveal" id="contenu">
   <div class="s-wrap">
-    <div class="s-label">Livrables partenaire</div>
-    <div class="s-title">Ce qu'on<br>produit<br><em>pour vous</em></div>
+    <div class="s-label">Ce qu'on produit pour vous</div>
+    <div class="s-title">Du contenu<br>qui ne ressemble<br><em>à rien d'autre.</em></div>
     <div class="dj-banner">
-      <img src="Capture_d_écran_2025-11-27_090452.png" alt="DJ set Trail to Techno">
+      <img src="Capture_d_écran_2025-11-27_090452.png" alt="">
       <div class="dj-banner-label">
-        <span class="s">Trail to Techno™ — soirée précédente</span>
-        <span class="t">Le DJ set fait partie de l'expédition.</span>
+        <span class="s">Trail to Techno™ · édition précédente</span>
+        <span class="t">Votre marque dans ce film.</span>
       </div>
     </div>
     <div class="content-grid">
-      <div class="c-card"><div class="c-card-type">Film Principal</div><span class="c-card-fmt">16/9 — 2 à 3 min</span><ul><li>YouTube TTC + Instagram</li><li>Projection soirée Nice</li><li>Droits exploitation partenaire</li><li>Version 9/16 disponible</li></ul></div>
-      <div class="c-card"><div class="c-card-type">Trailer</div><span class="c-card-fmt">16/9 & 9/16 — 20–30s</span><ul><li>Teaser digital avant projection</li><li>Invitation officielle soirée</li><li>Formats paid & social media</li></ul></div>
-      <div class="c-card"><div class="c-card-type">Reels</div><span class="c-card-fmt">9/16 vertical — 20–30s</span><ul><li>Version courte & impactante</li><li>Instagram / TikTok natif</li><li>Formats paid / organiques</li></ul></div>
-      <div class="c-card"><div class="c-card-type">Photo Produit</div><span class="c-card-fmt">Série course & expé</span><ul><li>Conditions réelles d'expédition</li><li>Actions trail, paysages, détails</li><li>Exploitation réseaux & retail</li></ul></div>
-      <div class="c-card"><div class="c-card-type">Photo Édito</div><span class="c-card-fmt">Série outdoor édito</span><ul><li>Shooting dédié sur terrain</li><li>Portraits, plans produits</li><li>Usage B2B, retail, digital</li></ul></div>
-      <div class="c-card"><div class="c-card-type">DJ Set filmé</div><span class="c-card-fmt">30–90 min — YouTube</span><ul><li>Enregistrement terrasse + soirée</li><li>Diffusion YouTube collective</li><li>Naming & branding partenaire</li></ul></div>
-    </div>
-    <div class="event-box">
-      <div class="e-box">
-        <div class="e-box-title">Soirée projection — Nice</div>
-        <p>Avant-première du film. Présence des athlètes, de la communauté trail & running niçoise. Grand écran. Activation produit. Tirage au sort pour les partenaires. J+7 après la course.</p>
-      </div>
-      <div class="e-box">
-        <div class="e-box-title">Activation en shop</div>
-        <p>Corner dédié partenaire, silhouettes complètes portées par les héros de l'expédition. Tirage au sort pour une sortie guidée. Offre liée à l'achat. PLV co-brandée.</p>
-      </div>
+      <div class="c-card"><div class="c-card-type">Film Principal</div><span class="c-card-fmt">16/9 · 2–3 min</span><ul><li>YouTube TTC + Instagram</li><li>Projection soirée Nice</li><li>Full rights partenaire</li></ul></div>
+      <div class="c-card"><div class="c-card-type">Reels & Trailer</div><span class="c-card-fmt">9/16 · 20–30s</span><ul><li>Instagram / TikTok natif</li><li>Formats paid + organiques</li></ul></div>
+      <div class="c-card"><div class="c-card-type">Photo produit</div><span class="c-card-fmt">Conditions réelles</span><ul><li>Actions trail, détails, paysages</li><li>Usage retail + réseaux + B2B</li></ul></div>
+      <div class="c-card"><div class="c-card-type">Photo édito</div><span class="c-card-fmt">Série outdoor</span><ul><li>Portraits, plans produits</li><li>Usage B2B, digital, print</li></ul></div>
+      <div class="c-card"><div class="c-card-type">DJ Set filmé</div><span class="c-card-fmt">30–90 min · YouTube</span><ul><li>Terrasse + soirée chalet</li><li>Naming partenaire</li></ul></div>
+      <div class="c-card"><div class="c-card-type">Testing filmé</div><span class="c-card-fmt">Samedi · Communauté</span><ul><li>30–50 coureurs sur place</li><li>Retours authentiques</li></ul></div>
     </div>
   </div>
 </section>
@@ -788,57 +736,63 @@ footer .fr { font-size:0.72rem; letter-spacing:0.1em; color:rgba(255,255,255,0.2
 <!-- PARTENARIAT -->
 <section class="partner-section reveal" id="partenariat">
   <div class="s-wrap">
-    <div class="s-label">Offre partenaire</div>
-    <div class="s-title">Rejoignez<br><em>l'expédition</em></div>
+    <div class="s-label">Offre partenaire · Deadline fin avril</div>
+    <div class="s-title">Trois façons<br>de <em>rejoindre</em><br>l'expédition.</div>
     <div class="offer-cards">
       <div class="o-card">
         <div class="o-label">Partenaire Principal</div>
-        <div class="o-price">8 000€ — 12 000€</div>
-        <p class="o-desc">Naming exclusif "by [Votre Marque]", full rights contenus, équipement team, drapeau au Gelas, testing communauté, activation shop complète, présence tous supports. Un seul partenaire principal par secteur.</p>
+        <div class="o-price">3 000€ — 5 000€</div>
+        <p class="o-desc">Naming exclusif "by [Votre Marque]", full rights contenus, équipement team expé, drapeau au Gelas, stand testing samedi, activation shop Nice. <strong>Un seul par secteur.</strong></p>
       </div>
       <div class="o-card">
         <div class="o-label">Partenaire Support</div>
-        <div class="o-price" style="color:var(--red)">2 000€ — 5 000€</div>
-        <p class="o-desc">Visibilité ciblée sur les formats de votre choix. Testing produit avec la communauté. Idéal pour valider une présence avant d'aller plus loin.</p>
+        <div class="o-price">500€ — 1 000€</div>
+        <p class="o-desc">Visibilité ciblée sur les formats de votre choix. Présence samedi testing. Mentions réseaux + film. Idéal pour une première collaboration.</p>
+      </div>
+      <div class="o-card">
+        <div class="o-label">Dotation matériel</div>
+        <div class="o-price">Dotation</div>
+        <p class="o-desc">Pas de budget cash ? On accepte la dotation en équipement trail (chaussures, vêtements, nutrition) avec visibilité en échange. On discute.</p>
       </div>
     </div>
     <div class="p-table">
       <div class="p-head">
         <div>Avantage</div>
-        <div>Principal · 8–12k€</div>
-        <div>Support · 2–5k€</div>
+        <div>Principal · 3–5k€</div>
+        <div>Support · 500–1k€</div>
+        <div>Dotation matériel</div>
       </div>
-      <div class="p-row"><div>Naming officiel</div><div><span class="ck">✓</span> Exclusif "by [Marque]"</div><div><span class="ck">✓</span> Mention générique</div></div>
-      <div class="p-row"><div>Exclusivité secteur</div><div><span class="ck">✓</span> Oui</div><div><span class="dx">—</span> Limitée</div></div>
-      <div class="p-row"><div>Équipement team</div><div><span class="ck">✓</span> Priorité totale</div><div><span class="ck">✓</span> Complémentaire</div></div>
-      <div class="p-row"><div>Sommet du Gelas</div><div><span class="ck">✓</span> Drapeau brandé</div><div><span class="dx">—</span></div></div>
-      <div class="p-row"><div>Testing communauté</div><div><span class="ck">✓</span> 30–50 coureurs sur place</div><div><span class="ck">✓</span> Visibilité testing</div></div>
-      <div class="p-row"><div>Contenu YouTube</div><div><span class="ck">✓</span> Naming & séquence dédiée</div><div><span class="ck">✓</span> Mention générique</div></div>
-      <div class="p-row"><div>Réseaux sociaux</div><div><span class="ck">✓</span> Co-branding reels/Strava</div><div><span class="ck">✓</span> Présence organique</div></div>
-      <div class="p-row"><div>Playlist Spotify</div><div><span class="ck">✓</span> Naming édition</div><div><span class="dx">—</span></div></div>
-      <div class="p-row"><div>Soirée aftermovie</div><div><span class="ck">✓</span> DJ Booth brandé</div><div><span class="ck">✓</span> Logo Wall of Fame</div></div>
-      <div class="p-row"><div>Activation shop</div><div><span class="ck">✓</span> Corner premium & test</div><div><span class="ck">✓</span> Corner partagé</div></div>
-      <div class="p-row"><div>Droits contenus</div><div><span class="ck">✓</span> Illimités (full rights)</div><div><span class="ck">✓</span> Organiques uniquement</div></div>
+      <div class="p-row"><div>Naming</div><div><span class="ck">✓</span> Exclusif "by [Marque]"</div><div><span class="ck">✓</span> Mention</div><div><span class="dx">—</span></div></div>
+      <div class="p-row"><div>Exclusivité secteur</div><div><span class="ck">✓</span> Oui</div><div><span class="dx">—</span></div><div><span class="dx">—</span></div></div>
+      <div class="p-row"><div>Équipement team</div><div><span class="ck">✓</span> Priorité totale</div><div><span class="ck">✓</span> Partiel</div><div><span class="ck">✓</span> Oui</div></div>
+      <div class="p-row"><div>Drapeau au Gelas</div><div><span class="ck">✓</span> Brandé</div><div><span class="dx">—</span></div><div><span class="dx">—</span></div></div>
+      <div class="p-row"><div>Stand testing samedi</div><div><span class="ck">✓</span> Dédié + filming</div><div><span class="ck">✓</span> Partagé</div><div><span class="ck">✓</span> Oui</div></div>
+      <div class="p-row"><div>Film + contenu</div><div><span class="ck">✓</span> Full rights</div><div><span class="ck">✓</span> Organiques</div><div><span class="ck">✓</span> Organiques</div></div>
+      <div class="p-row"><div>Playlist Spotify</div><div><span class="ck">✓</span> Naming édition</div><div><span class="dx">—</span></div><div><span class="dx">—</span></div></div>
+      <div class="p-row"><div>Soirée aftermovie Nice</div><div><span class="ck">✓</span> DJ Booth brandé</div><div><span class="ck">✓</span> Logo</div><div><span class="dx">—</span></div></div>
     </div>
     <div class="budget-total">
       <div>
-        <div class="bt-label">Budget total recommandé — tout compris</div>
-        <div class="bt-price">20 000<em>€</em></div>
+        <div class="bt-label">Budget total projet</div>
+        <div class="bt-price">~10 000<em>€</em></div>
       </div>
-      <p class="bt-desc">Production audiovisuelle complète (réalisateur, photographe, drone, montage) + logistique expédition + chalet Saint-Martin-Vésubie + activation shop + soirée projection + social media + droits.</p>
+      <p class="bt-desc">Production vidéo + photo + drone, logistique expédition, chalet Saint-Martin-Vésubie, soirée communauté, projection aftermovie à Nice. Tout est pensé pour maximiser le retour pour les marques partenaires.</p>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
 <section class="cta-section reveal" id="contact">
-  <div class="photo-bg"><img src="DSC03191.jpg" alt="TTC team"></div>
+  <div class="photo-bg"><img src="DSC03191.jpg" alt=""></div>
   <div class="cta-inner">
-    <div class="cta-label">Rejoignez-nous</div>
-    <h2 class="cta-title">On part au<br>sommet<br>ensemble ?</h2>
+    <div class="cta-label">On vous attend</div>
+    <h2 class="cta-title">On part au<br>sommet.<br>Avec vous ?</h2>
+    <div class="cta-deadline">
+      <span>⏳ Deadline partenaires — <strong>fin avril 2026</strong></span>
+    </div>
     <div class="cta-contacts">
       <div class="cta-c">
-        <div class="cta-c-lbl">Contact projet</div>
+        <div class="cta-c-lbl">Alexandre Dussourd</div>
         <div class="cta-c-name">Tout Terrain Club</div>
         <div class="cta-c-val">toutterrainclub@gmail.com</div>
       </div>
@@ -848,27 +802,129 @@ footer .fr { font-size:0.72rem; letter-spacing:0.1em; color:rgba(255,255,255,0.2
         <div class="cta-c-val">instagram.com/toutterrainclub</div>
       </div>
       <div class="cta-c">
-        <div class="cta-c-lbl">YouTube & Strava</div>
+        <div class="cta-c-lbl">YouTube</div>
         <div class="cta-c-name">Tout Terrain Club</div>
-        <div class="cta-c-val">Retrouvez tous nos contenus</div>
+        <div class="cta-c-val">Voir nos éditions précédentes</div>
       </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="fl">Tout Terrain Club<em>™</em> — Trail to Techno<em>™</em> 2026</div>
-  <div class="fr">Nice · Saint-Martin-Vésubie · Cime du Gelas 3 143m</div>
+  <div class="fl">Tout Terrain Club<em>™</em> — Trail to Techno<em>™</em> Gelas 2026</div>
+  <div class="fr">Nice · Saint-Martin-Vésubie · Cime du Gélas 3 143m</div>
 </footer>
 
 <script>
-const obs = new IntersectionObserver(es => es.forEach(e => {
-  if(e.isIntersecting) e.target.classList.add('vis');
-}), { threshold:0.06 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-document.querySelectorAll('.pill').forEach(p =>
-  p.addEventListener('click', () => p.classList.toggle('on'))
-);
+// ── GPX DATA ──────────────────────────────────────────────
+const GPX = {"map":[[43.69812,7.286444],[43.694998,7.286086],[43.694261,7.287414],[43.693552,7.289929],[43.692702,7.291602],[43.692286,7.292926],[43.692638,7.293975],[43.691382,7.297428],[43.691319,7.299357],[43.69265,7.299244],[43.694687,7.29936],[43.69563,7.300147],[43.694811,7.302211],[43.696161,7.304053],[43.696163,7.304602],[43.696984,7.304713],[43.698846,7.305318],[43.698508,7.306913],[43.699748,7.309405],[43.701617,7.311936],[43.702646,7.311338],[43.703882,7.311936],[43.704559,7.312584],[43.706201,7.31275],[43.707282,7.314112],[43.707757,7.315261],[43.707351,7.316319],[43.707506,7.317484],[43.707284,7.318758],[43.707002,7.320059],[43.707674,7.32178],[43.710027,7.322893],[43.710857,7.322335],[43.710157,7.325582],[43.710646,7.327351],[43.711887,7.329693],[43.71363,7.331625],[43.714529,7.33312],[43.715785,7.334386],[43.716387,7.336833],[43.71771,7.343878],[43.718348,7.345774],[43.71865,7.347069],[43.720121,7.348739],[43.720908,7.350623],[43.721382,7.352498],[43.722151,7.355903],[43.722986,7.358559],[43.723497,7.359116],[43.723875,7.359252],[43.724182,7.360103],[43.724387,7.360258],[43.724541,7.361218],[43.724719,7.361581],[43.724984,7.363035],[43.724907,7.364334],[43.725762,7.364797],[43.72616,7.364187],[43.727322,7.364102],[43.728074,7.364423],[43.728333,7.36457],[43.728579,7.364055],[43.728903,7.363225],[43.728607,7.363028],[43.728658,7.362557],[43.729718,7.361782],[43.73118,7.364042],[43.731924,7.364067],[43.732892,7.363993],[43.734727,7.366216],[43.735039,7.367362],[43.735714,7.367103],[43.736009,7.367767],[43.736597,7.368721],[43.736824,7.368964],[43.737064,7.368891],[43.737048,7.370723],[43.737847,7.370769],[43.737792,7.374215],[43.738049,7.373912],[43.738087,7.375564],[43.737883,7.377406],[43.738859,7.379203],[43.739613,7.38098],[43.740666,7.382559],[43.742116,7.383753],[43.743015,7.385143],[43.744135,7.386118],[43.744919,7.387125],[43.744393,7.389673],[43.74334,7.391725],[43.744288,7.394016],[43.745247,7.395151],[43.745961,7.394836],[43.746278,7.394782],[43.746607,7.395925],[43.747519,7.398288],[43.748986,7.399017],[43.751311,7.401275],[43.753582,7.403072],[43.755199,7.403439],[43.76021,7.402545],[43.760136,7.399718],[43.760499,7.397899],[43.761052,7.396554],[43.761745,7.396168],[43.763086,7.397061],[43.764199,7.397517],[43.764376,7.398513],[43.764866,7.398481],[43.76571,7.396749],[43.766885,7.395567],[43.768676,7.394228],[43.770311,7.392927],[43.771081,7.39112],[43.769526,7.388687],[43.77004,7.386612],[43.771898,7.384949],[43.772702,7.384863],[43.774204,7.38626],[43.77478,7.386703],[43.775765,7.385838],[43.776987,7.385743],[43.778337,7.386349],[43.779224,7.384429],[43.779526,7.383056],[43.779899,7.382453],[43.779979,7.381925],[43.780278,7.381667],[43.781047,7.38183],[43.781509,7.38157],[43.782382,7.38196],[43.783272,7.38342],[43.784033,7.385346],[43.784986,7.387513],[43.787028,7.389044],[43.788112,7.388947],[43.789123,7.388859],[43.79142,7.390682],[43.792956,7.391349],[43.795178,7.394256],[43.796376,7.397785],[43.797949,7.399282],[43.798746,7.399106],[43.799944,7.400214],[43.80065,7.400365],[43.801306,7.399956],[43.801792,7.39982],[43.802397,7.401349],[43.802934,7.401391],[43.803462,7.40166],[43.804363,7.402529],[43.805242,7.403188],[43.807473,7.405],[43.80823,7.405083],[43.810011,7.406633],[43.811571,7.409073],[43.812792,7.410122],[43.815623,7.406241],[43.816382,7.405259],[43.81581,7.404561],[43.818283,7.404498],[43.819353,7.404586],[43.819974,7.405295],[43.821585,7.406124],[43.82275,7.407519],[43.823197,7.406926],[43.823625,7.406856],[43.825087,7.404335],[43.825616,7.404292],[43.82586,7.404766],[43.82707,7.403668],[43.827936,7.403399],[43.828964,7.403382],[43.830963,7.404774],[43.833314,7.407311],[43.834162,7.409559],[43.835861,7.409805],[43.837247,7.410521],[43.838087,7.410461],[43.838495,7.410041],[43.839415,7.410326],[43.840718,7.409875],[43.842945,7.409577],[43.842279,7.410611],[43.844898,7.410902],[43.848607,7.410077],[43.850681,7.40969],[43.852723,7.409236],[43.854758,7.409097],[43.855679,7.412835],[43.857582,7.415112],[43.859635,7.417389],[43.859995,7.420398],[43.860926,7.421589],[43.861417,7.42421],[43.860403,7.426329],[43.859781,7.427266],[43.860789,7.428744],[43.864312,7.429197],[43.866219,7.428941],[43.867152,7.430023],[43.868426,7.431291],[43.870379,7.435618],[43.871089,7.437204],[43.87212,7.437559],[43.874289,7.440232],[43.87522,7.442374],[43.875451,7.442747],[43.875568,7.443069],[43.876514,7.44568],[43.877344,7.446225],[43.878025,7.447322],[43.879098,7.447729],[43.880257,7.44678],[43.881542,7.445264],[43.883499,7.445375],[43.884082,7.443902],[43.886814,7.444074],[43.887057,7.444183],[43.888974,7.444981],[43.889438,7.445746],[43.889651,7.445541],[43.889894,7.445607],[43.890241,7.446127],[43.890332,7.445804],[43.890845,7.44595],[43.891718,7.44542],[43.892707,7.44587],[43.893678,7.446863],[43.894337,7.446892],[43.895744,7.445842],[43.896712,7.444851],[43.898407,7.443251],[43.899833,7.442942],[43.903428,7.441773],[43.905908,7.439781],[43.908203,7.438861],[43.911115,7.437464],[43.911776,7.436693],[43.913735,7.436379],[43.921687,7.436777],[43.924823,7.437715],[43.92978,7.437443],[43.930703,7.442096],[43.933938,7.446451],[43.934862,7.447821],[43.93655,7.448969],[43.937274,7.449205],[43.935867,7.450873],[43.938939,7.454669],[43.941788,7.455863],[43.944206,7.456809],[43.947116,7.456278],[43.949159,7.456192],[43.950908,7.455703],[43.952537,7.454474],[43.95561,7.453137],[43.963187,7.449511],[43.967554,7.447764],[43.973141,7.448998],[43.97504,7.447358],[43.979987,7.445462],[43.983027,7.442683],[43.986376,7.442962],[43.989081,7.444222],[43.991933,7.444332],[43.995355,7.443744],[43.997018,7.441023],[43.999823,7.436846],[44.000433,7.431879],[44.00376,7.431265],[44.006368,7.429584],[44.008784,7.426604],[44.010243,7.425118],[44.012096,7.423611],[44.013399,7.423166],[44.016019,7.423097],[44.016767,7.421921],[44.01914,7.418537],[44.024648,7.414426],[44.025605,7.414308],[44.029025,7.417803],[44.03038,7.419645],[44.031871,7.423424],[44.03224,7.425689],[44.034379,7.425883],[44.036681,7.426918],[44.039031,7.429274],[44.040076,7.428717],[44.040267,7.429085],[44.040923,7.428882],[44.041349,7.428995],[44.041888,7.429442],[44.042324,7.429848],[44.042514,7.430434],[44.044254,7.430854],[44.045983,7.430759],[44.047013,7.430561],[44.047272,7.430769],[44.048008,7.430369],[44.049314,7.431483],[44.049489,7.432666],[44.050139,7.433819],[44.05045,7.435853],[44.050974,7.436383],[44.051184,7.437088],[44.051297,7.437522],[44.05128,7.439431],[44.051539,7.440519],[44.051978,7.442863],[44.052086,7.444015],[44.051744,7.444573],[44.052291,7.445392],[44.052693,7.446178],[44.052795,7.446976],[44.052699,7.44731],[44.052865,7.447771],[44.053881,7.448232],[44.053608,7.450193],[44.054218,7.451317],[44.05547,7.451337],[44.055856,7.451729],[44.056594,7.451161],[44.057025,7.449639],[44.057128,7.446542],[44.057781,7.444137],[44.058682,7.442553],[44.059417,7.442858],[44.060719,7.443283],[44.061667,7.443202],[44.062303,7.442681],[44.062663,7.442912],[44.063647,7.443228],[44.064726,7.442851],[44.065763,7.442176],[44.066409,7.442421],[44.067295,7.442014],[44.069539,7.441285],[44.070571,7.44067],[44.071501,7.439824],[44.072502,7.439816],[44.073462,7.439635],[44.074371,7.439019],[44.076069,7.438201],[44.077411,7.437599],[44.077871,7.437512],[44.078276,7.43778],[44.078561,7.437656],[44.078917,7.437098],[44.079707,7.437874],[44.080002,7.437737],[44.080355,7.438271],[44.08103,7.438992],[44.082175,7.438148],[44.082978,7.438291],[44.08377,7.437567],[44.084544,7.437224],[44.086751,7.435347],[44.089306,7.433006],[44.091334,7.430323],[44.093369,7.429119],[44.095248,7.427982],[44.09639,7.427847],[44.097099,7.426512],[44.097153,7.424413],[44.09744,7.424065],[44.098176,7.42313],[44.098947,7.420744],[44.099844,7.419256],[44.100855,7.418254],[44.101295,7.414843],[44.101164,7.410532],[44.101789,7.408831],[44.102216,7.407889],[44.103225,7.408032],[44.103122,7.40665],[44.103032,7.406157],[44.103479,7.404243],[44.103806,7.403625],[44.104321,7.403625],[44.104689,7.402529],[44.104834,7.401328],[44.104471,7.40049],[44.105147,7.400556],[44.105027,7.399554],[44.104734,7.397467],[44.104256,7.396469],[44.101766,7.396067],[44.100152,7.396319],[44.099407,7.396654],[44.098824,7.396249],[44.098549,7.395073],[44.098057,7.394343],[44.098486,7.393377],[44.09897,7.392545],[44.099771,7.391575],[44.100306,7.389815],[44.100271,7.387528],[44.101109,7.386267],[44.101104,7.385919],[44.101625,7.38497],[44.101665,7.38426],[44.101918,7.381691],[44.102781,7.380129],[44.10246,7.378009],[44.102359,7.375151],[44.101215,7.372979],[44.10073,7.369541],[44.101475,7.367544],[44.102111,7.368042],[44.102449,7.367671],[44.103433,7.366424],[44.103902,7.364569],[44.104232,7.36388],[44.104404,7.363165],[44.104379,7.361954],[44.104808,7.362087],[44.105169,7.361949],[44.106775,7.362788],[44.106997,7.363733],[44.107262,7.364057],[44.107523,7.36404],[44.107749,7.364159],[44.108873,7.365589],[44.109496,7.366669],[44.110112,7.367369],[44.111027,7.36797],[44.111835,7.368821],[44.112417,7.369735],[44.113299,7.37169],[44.114108,7.374109],[44.115397,7.37561],[44.116964,7.376676],[44.116357,7.379916],[44.117612,7.383542],[44.119538,7.385895],[44.121463,7.38553],[44.12275,7.384191],[44.121738,7.385554],[44.120549,7.386318],[44.117787,7.384083],[44.11633,7.380667],[44.116794,7.37737],[44.115729,7.375826],[44.114094,7.374771],[44.11356,7.37202],[44.112769,7.370428],[44.111895,7.36895],[44.111442,7.368295],[44.11027,7.367476],[44.109592,7.366859],[44.109077,7.365846],[44.107863,7.364314],[44.107991,7.363555],[44.108592,7.363037],[44.109028,7.362297],[44.109982,7.361991],[44.111087,7.361937],[44.111953,7.361499],[44.112234,7.360717],[44.112902,7.361255],[44.113642,7.361135],[44.114174,7.361196],[44.115176,7.361181],[44.115794,7.360456],[44.114702,7.360102],[44.113669,7.358647],[44.113292,7.358041],[44.113535,7.357978],[44.112965,7.35727],[44.112618,7.356326],[44.112553,7.355692],[44.112601,7.354585],[44.112528,7.353212],[44.112576,7.352613],[44.112729,7.35203],[44.11282,7.35109],[44.112449,7.350461],[44.112705,7.350047],[44.112975,7.34949],[44.113282,7.349326],[44.113554,7.34816],[44.113915,7.346659],[44.114132,7.345454],[44.114986,7.343523],[44.115734,7.342173],[44.116333,7.340983],[44.117643,7.338237],[44.117717,7.337359],[44.117975,7.336459],[44.117907,7.33479],[44.117965,7.332638],[44.118136,7.331826],[44.118366,7.331191],[44.119614,7.330642],[44.120075,7.330203],[44.118436,7.328892],[44.117219,7.327567],[44.115836,7.325114],[44.114177,7.323184],[44.112479,7.321988],[44.11151,7.320737],[44.11001,7.319722],[44.108355,7.318693],[44.108126,7.316033],[44.1079,7.311777],[44.107634,7.308808],[44.108157,7.305854],[44.108556,7.303429],[44.109061,7.300697],[44.109277,7.298331],[44.110072,7.294404],[44.110438,7.290812],[44.111178,7.285717],[44.110399,7.287473],[44.109741,7.285432],[44.108623,7.283844],[44.106699,7.284127],[44.105395,7.282606],[44.10451,7.280519],[44.103473,7.27997],[44.10312,7.278661],[44.101677,7.27563],[44.099995,7.272712],[44.099785,7.271897],[44.097344,7.26909],[44.093646,7.268292],[44.089688,7.266919],[44.087944,7.266045],[44.089713,7.263155],[44.087855,7.262105],[44.086675,7.261779],[44.083039,7.258977],[44.079832,7.259155],[44.078109,7.258996],[44.076905,7.258986],[44.075967,7.258377],[44.076137,7.255562],[44.076537,7.254532],[44.076356,7.253553],[44.074978,7.254352],[44.074504,7.254343],[44.073798,7.254933],[44.07302,7.254575],[44.071133,7.257092],[44.069983,7.256619]],"elev":[[0,6],[0.47,6],[0.89,9],[1.19,39],[1.6,108],[2.02,159],[2.35,176],[2.85,134],[3.11,90],[3.47,38],[3.81,2],[4.24,2],[4.5,5],[4.7,12],[5.02,24],[5.26,40],[5.52,75],[5.87,118],[6.33,141],[6.72,124],[7.06,137],[7.44,186],[7.73,254],[8.68,139],[9.09,73],[9.5,51],[9.95,29],[10.32,25],[10.52,54],[10.68,82],[10.82,113],[11.01,153],[11.3,199],[11.52,247],[11.73,284],[11.87,310],[12.03,341],[12.19,354],[12.57,372],[12.79,405],[13.16,495],[13.33,537],[13.72,613],[13.8,626],[14.14,641],[14.52,618],[14.92,589],[15.23,558],[15.54,542],[15.85,541],[16.1,536],[16.47,494],[16.88,453],[17.13,477],[17.26,496],[17.72,559],[18.21,563],[18.67,551],[19.4,480],[19.76,455],[20.03,445],[20.37,473],[20.63,501],[20.9,530],[21.29,543],[21.67,522],[22.08,475],[22.49,432],[22.81,397],[23.02,368],[23.29,365],[23.67,363],[23.89,393],[24.03,417],[24.19,450],[24.39,484],[24.72,531],[25.17,537],[25.43,513],[25.91,478],[26.44,419],[26.98,423],[27.27,455],[27.48,512],[27.73,569],[27.95,612],[28.15,653],[28.36,684],[28.7,714],[29.17,689],[29.59,636],[30.19,575],[30.64,506],[30.92,468],[31.4,428],[31.57,440],[32.01,526],[32.26,564],[32.51,613],[32.84,663],[33.37,736],[33.75,808],[34.04,857],[34.26,900],[34.52,947],[34.98,1032],[35.36,1073],[36.09,1040],[36.54,1014],[37.16,964],[37.71,888],[38.19,786],[38.7,674],[39.02,641],[39.52,609],[39.98,571],[40.54,536],[40.88,499],[41.36,439],[41.57,404],[41.87,369],[42.1,354],[42.38,360],[42.77,399],[43.13,434],[43.53,487],[43.83,518],[44.05,531],[44.24,547],[44.41,564],[44.84,617],[45.13,660],[45.43,687],[45.92,743],[46.42,828],[47.17,937],[47.68,1056],[48.01,1142],[49.23,1358],[50,1472],[50.89,1590],[51.23,1668],[51.54,1733],[52.43,1755],[52.99,1688],[53.55,1702],[53.96,1723],[54.86,1822],[55.82,1898],[56.66,1872],[57.54,1799],[58.2,1781],[58.77,1837],[59.41,1889],[60.31,2021],[60.93,1964],[61.53,1935],[61.92,1920],[62.36,1877],[62.72,1838],[63.7,1973],[64.29,2049],[64.75,2089],[65.2,2058],[65.63,2071],[66.15,2172],[66.26,2197],[66.43,2238],[66.55,2267],[66.79,2311],[67.07,2367],[67.2,2394],[67.51,2392],[67.71,2366],[67.99,2321],[68.1,2300],[68.3,2281],[68.57,2267],[68.8,2260],[68.97,2253],[69.1,2236],[69.19,2222],[69.46,2182],[69.67,2164],[69.92,2146],[70.17,2137],[70.6,2164],[70.88,2169],[71.11,2182],[71.33,2203],[71.47,2211],[71.71,2225],[71.94,2258],[72.21,2293],[72.51,2305],[72.73,2325],[72.95,2358],[73.29,2388],[73.44,2406],[73.6,2431],[73.87,2483],[74.04,2508],[74.33,2491],[74.58,2440],[74.78,2419],[75.4,2478],[75.94,2561],[76.32,2630],[76.59,2626],[76.81,2561],[77.1,2461],[77.44,2383],[77.81,2374],[78.32,2347],[78.56,2307],[78.73,2282],[78.96,2255],[79.08,2245],[79.24,2231],[79.41,2216],[79.59,2198],[79.84,2191],[80.27,2185],[80.48,2163],[80.7,2166],[80.9,2223],[81.12,2305],[81.36,2380],[81.68,2494],[81.82,2498],[82.05,2444],[82.41,2369],[82.78,2289],[83.25,2201],[83.59,2114],[83.87,2088],[84.18,2079],[84.31,2099],[84.52,2131],[84.71,2163],[85.01,2220],[85.1,2243],[85.22,2276],[85.48,2349],[85.68,2401],[85.88,2444],[86.22,2496],[86.62,2567],[87.06,2672],[87.6,2861],[88.03,2992],[88.46,2966],[88.95,2812],[89.47,2644],[89.88,2547],[90.29,2484],[90.6,2432],[90.8,2386],[90.97,2337],[91.24,2281],[91.39,2268],[91.55,2264],[91.78,2275],[92.08,2316],[92.29,2355],[92.48,2397],[92.81,2428],[93.07,2433],[93.22,2447],[93.42,2450],[93.58,2434],[93.79,2404],[93.92,2377],[94.13,2327],[94.28,2296],[94.4,2270],[94.62,2231],[94.86,2196],[95.12,2161],[95.49,2115],[95.68,2064],[96,1982],[96.14,1957],[96.4,1930],[96.72,1900],[97.09,1867],[97.58,1817],[97.88,1771],[98.29,1742],[98.75,1696],[99.24,1663],[99.63,1646],[100,1644],[100.57,1641],[101.13,1626],[101.52,1722],[101.94,1778],[102.34,1807],[102.68,1778],[103.17,1761],[103.56,1741],[104.3,1753],[105.13,1696],[105.63,1536],[105.98,1461],[106.78,1322],[107.13,1259],[107.44,1196],[107.82,1135],[108.12,1073],[108.27,1044],[108.45,1012],[108.92,983]],"total_km":108.9,"max_ele":3031,"keypoints":[{"name":"Nice","km":0,"ele":6,"lat":43.69812,"lon":7.286444,"color":"#D42B1E"},{"name":"Refuge de Nice","km":79.4,"ele":2218,"lat":44.104471,"lon":7.40049,"color":"#8C7B72"},{"name":"Cime du Gélas","km":88.2,"ele":3025,"lat":44.12275,"lon":7.384191,"color":"#D42B1E"},{"name":"St-Martin-Vésubie","km":108.9,"ele":983,"lat":44.070061,"lon":7.256476,"color":"#1A1410"}]};
+
+function drawMap(){
+  const canvas=document.getElementById('mapCanvas');
+  const wrap=canvas.parentElement;
+  const W=wrap.offsetWidth,H=500;
+  canvas.width=W*devicePixelRatio;canvas.height=H*devicePixelRatio;
+  canvas.style.width=W+'px';canvas.style.height=H+'px';
+  const ctx=canvas.getContext('2d');ctx.scale(devicePixelRatio,devicePixelRatio);
+  const pts=GPX.map;
+  const lats=pts.map(p=>p[0]),lons=pts.map(p=>p[1]);
+  const minLat=Math.min(...lats),maxLat=Math.max(...lats);
+  const minLon=Math.min(...lons),maxLon=Math.max(...lons);
+  const pad=44;
+  function project(lat,lon){
+    return[pad+(lon-minLon)/(maxLon-minLon)*(W-pad*2),H-pad-(lat-minLat)/(maxLat-minLat)*(H-pad*2)];
+  }
+  ctx.fillStyle='#FAFAF8';ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='#E8E0D8';ctx.lineWidth=0.5;
+  for(let i=0;i<=4;i++){
+    const y=pad+i*(H-pad*2)/4;ctx.beginPath();ctx.moveTo(pad,y);ctx.lineTo(W-pad,y);ctx.stroke();
+    const x=pad+i*(W-pad*2)/4;ctx.beginPath();ctx.moveTo(x,pad);ctx.lineTo(x,H-pad);ctx.stroke();
+  }
+  ctx.save();ctx.shadowColor='rgba(212,43,30,0.22)';ctx.shadowBlur=10;
+  ctx.strokeStyle='#D42B1E';ctx.lineWidth=3;ctx.lineJoin='round';ctx.lineCap='round';
+  ctx.beginPath();pts.forEach((p,i)=>{const[x,y]=project(p[0],p[1]);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.stroke();ctx.restore();
+  ctx.strokeStyle='#D42B1E';ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.lineCap='round';
+  ctx.beginPath();pts.forEach((p,i)=>{const[x,y]=project(p[0],p[1]);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.stroke();
+  GPX.keypoints.forEach(kp=>{
+    const[x,y]=project(kp.lat,kp.lon);
+    ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);ctx.fillStyle='white';ctx.fill();
+    ctx.strokeStyle=kp.color;ctx.lineWidth=2.5;ctx.stroke();
+    ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fillStyle=kp.color;ctx.fill();
+    const label=kp.name.toUpperCase();
+    ctx.font='700 10px DM Sans,sans-serif';
+    const tw=ctx.measureText(label).width;
+    let lx=x+14,ly=y+4;
+    if(x>W-110)lx=x-tw-18;if(y<30)ly=y+20;
+    ctx.fillStyle='rgba(250,250,248,0.93)';ctx.fillRect(lx-4,ly-12,tw+8,18);
+    ctx.fillStyle=kp.color;ctx.fillText(label,lx,ly);
+    ctx.font='300 9px DM Sans,sans-serif';ctx.fillStyle='#8C7B72';
+    ctx.fillText(kp.km+'km · '+kp.ele+'m',lx,ly+13);
+  });
+}
+
+function drawElev(){
+  const canvas=document.getElementById('elevCanvas');
+  const wrap=canvas.parentElement;
+  const W=wrap.offsetWidth-64,H=175;
+  canvas.width=W*devicePixelRatio;canvas.height=H*devicePixelRatio;
+  canvas.style.width=W+'px';canvas.style.height=H+'px';
+  const ctx=canvas.getContext('2d');ctx.scale(devicePixelRatio,devicePixelRatio);
+  const pts=GPX.elev,maxKm=GPX.total_km,maxEle=GPX.max_ele+150;
+  const pad={t:8,r:6,b:26,l:42};
+  function px(km,ele){
+    return[pad.l+km/maxKm*(W-pad.l-pad.r),pad.t+(1-ele/maxEle)*(H-pad.t-pad.b)];
+  }
+  ctx.fillStyle='#FAFAF8';ctx.fillRect(0,0,W,H);
+  [0,500,1000,1500,2000,2500,3000].forEach(e=>{
+    const[,y]=px(0,e);
+    if(y>=pad.t&&y<=H-pad.b){
+      ctx.strokeStyle='#E0D8D0';ctx.lineWidth=0.5;
+      ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
+      ctx.fillStyle='#8C7B72';ctx.font='9px DM Sans,sans-serif';ctx.textAlign='right';
+      ctx.fillText(e+'m',pad.l-4,y+3);
+    }
+  });
+  const grad=ctx.createLinearGradient(0,pad.t,0,H-pad.b);
+  grad.addColorStop(0,'rgba(212,43,30,0.32)');grad.addColorStop(1,'rgba(212,43,30,0.02)');
+  ctx.beginPath();
+  const[x0]=px(pts[0][0],pts[0][1]);ctx.moveTo(x0,H-pad.b);ctx.lineTo(x0,px(pts[0][0],pts[0][1])[1]);
+  pts.forEach(p=>{const[x,y]=px(p[0],p[1]);ctx.lineTo(x,y);});
+  const[xlast]=px(pts[pts.length-1][0],pts[pts.length-1][1]);ctx.lineTo(xlast,H-pad.b);
+  ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+  ctx.strokeStyle='#D42B1E';ctx.lineWidth=2;ctx.lineJoin='round';
+  ctx.beginPath();pts.forEach((p,i)=>{const[x,y]=px(p[0],p[1]);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.stroke();
+  ctx.fillStyle='#8C7B72';ctx.font='9px DM Sans,sans-serif';ctx.textAlign='center';
+  [0,25,50,75,100,108.9].forEach(km=>{
+    const[x]=px(km,0);ctx.fillText(km===108.9?'109':km+'km',x,H-6);
+  });
+  GPX.keypoints.forEach(kp=>{
+    const closest=GPX.elev.reduce((a,b)=>Math.abs(a[0]-kp.km)<Math.abs(b[0]-kp.km)?a:b);
+    const[x,y]=px(closest[0],closest[1]);
+    ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.fillStyle=kp.color;ctx.fill();
+    ctx.strokeStyle='white';ctx.lineWidth=1.5;ctx.stroke();
+  });
+}
+
+function buildKeypoints(){
+  const el=document.getElementById('keypoints');
+  GPX.keypoints.forEach(kp=>{
+    el.innerHTML+=`<div class="trace-kp">
+      <div class="trace-kp-dot" style="background:${kp.color}"></div>
+      <div class="trace-kp-name">${kp.name}</div>
+      <div class="trace-kp-info">${kp.km}km · ${kp.ele}m</div>
+    </div>`;
+  });
+}
+
+window.addEventListener('load',()=>{drawMap();drawElev();buildKeypoints();});
+window.addEventListener('resize',()=>{drawMap();drawElev();});
+
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:0.05});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>p.classList.toggle('on')));
 </script>
 </body>
 </html>
